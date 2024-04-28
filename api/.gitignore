@@ -8,6 +8,7 @@
 ###> symfony/framework-bundle ###
 /.env
 /.env.local
+/.env.test
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
@@ -15,3 +16,22 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+### PHPUnit ###
+# Covers PHPUnit
+# Reference: https://phpunit.de/
+
+# Generated files
+.phpunit.cache
+
+# PHPUnit
+/app/phpunit.xml
+
+# Build data
+/build/
+mysql
