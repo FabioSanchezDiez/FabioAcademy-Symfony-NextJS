@@ -13,20 +13,16 @@ services:
   php:
     image: php:8.1-fpm
     volumes:
-      - ./api:/var/www/html
+      - .:/var/www/html
     environment:
       - APP_ENV=dev
 
-  mysql:
+  database:
     image: mysql:8.0
+    volumes:
+      - ./mysql:/var/lib/mysql
     ports:
       - '3306:3306'
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: fabio_code_academy
-
-  frontend:
-    build:
-      context: ./frontend
-    ports:
-      - '3000:3000'
