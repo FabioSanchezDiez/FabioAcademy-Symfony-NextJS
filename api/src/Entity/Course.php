@@ -32,6 +32,23 @@ class Course
     #[ORM\Column(length: 255)]
     private ?string $category = null;
 
+    /**
+     * @param string|null $name
+     * @param string|null $description
+     * @param int|null $registeredUsers
+     * @param \DateTimeInterface|null $publicationDate
+     * @param string|null $image
+     * @param string|null $category
+     */
+    public function __construct(?string $name, ?string $description, ?int $registeredUsers, ?\DateTimeInterface $publicationDate, ?string $image, ?string $category)
+    {
+        $this->name = $name;
+        $this->description = $description;
+        $this->registeredUsers = $registeredUsers;
+        $this->publicationDate = $publicationDate;
+        $this->image = $image;
+        $this->category = $category;
+    }
 
     public function getId(): ?int
     {
