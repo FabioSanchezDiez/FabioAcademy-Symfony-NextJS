@@ -2,13 +2,8 @@
 
 namespace App\Controller;
 
-use App\DTO\CourseDTO;
-use App\Entity\Course;
 use App\Repository\CourseRepository;
-use App\Service\AutoMapperService;
 use App\Service\CourseService;
-use AutoMapperPlus\AutoMapper;
-use AutoMapperPlus\Configuration\AutoMapperConfig;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +18,15 @@ class CourseController extends AbstractController
     public function courses(): Response
     {
         $courses = $this->courseRepository->findAll();
+        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
+    #[Route('/courses/paginated/{page}/{size}', name: 'courses_paginated', methods: ['GET'])]
+    public function coursesPaginated(int $page, int $size): Response
+    {
+        $courses = $this->courseRepository->findAllPaginated($page,$size);
         $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
