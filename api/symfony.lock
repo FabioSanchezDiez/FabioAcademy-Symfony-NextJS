@@ -38,6 +38,9 @@
             "./migrations/.gitignore"
         ]
     },
+    "mark-gerarts/automapper-plus-bundle": {
+        "version": "1.5.0"
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {

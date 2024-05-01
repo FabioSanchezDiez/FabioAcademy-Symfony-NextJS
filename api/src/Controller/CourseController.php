@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+use App\DTO\CourseDTO;
 use App\Entity\Course;
 use App\Repository\CourseRepository;
+use App\Service\AutoMapperService;
+use App\Service\CourseService;
+use AutoMapperPlus\AutoMapper;
+use AutoMapperPlus\Configuration\AutoMapperConfig;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +36,26 @@ class CourseController extends AbstractController
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
+
+    #[Route('/courses/create', name: 'courses_create', methods: ['POST'])]
+    public function createCourse(CourseService $courseService, Request $request): Response
+    {
+        $courseData = json_decode($request->getContent(), true);
+        $course = $courseService->createCourse($courseData);
+        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
+    }
+
+//    #[Route('/courses/dto/{id}', name: 'courses_id_dto', methods: ['GET'])]
+//    public function courseByIdDTO(AutoMapperService $mapper, int $id): Response
+//    {
+//        $course = $this->courseRepository->find($id);
+//        $courseDto= $mapper->mapCourse($course);
+//        $data = $this->serializer->serialize($courseDto, 'json', ['datetime_format' => 'Y-m-d']);
+//
+//        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+//    }
 
 //    #[Route('/courses2', name: 'courses2', methods: ['POST'])]
 //    public function courses2(Request $request): Response
