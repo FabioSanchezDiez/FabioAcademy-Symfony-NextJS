@@ -3,8 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
 class Course
@@ -33,6 +37,13 @@ class Course
     private ?string $category = null;
 
     /**
+     * @var Collection<int, Section>
+     */
+    #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'course', fetch: 'LAZY')]
+    #[Ignore]
+    private Collection $sections;
+
+    /**
      * @param string|null $name
      * @param string|null $description
      * @param int|null $registeredUsers
@@ -48,6 +59,7 @@ class Course
         $this->publicationDate = $publicationDate;
         $this->image = $image;
         $this->category = $category;
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,6 +135,36 @@ class Course
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): static
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections->add($section);
+            $section->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): static
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCourse() === $this) {
+                $section->setCourse(null);
+            }
+        }
 
         return $this;
     }

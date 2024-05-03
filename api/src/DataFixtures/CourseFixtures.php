@@ -14,13 +14,7 @@ class CourseFixtures extends Fixture
         $this->initializeCoursesData();
 
         foreach ($this->coursesData as $courseInfo) {
-            $course = new Course();
-            $course->setName($courseInfo['name']);
-            $course->setDescription($courseInfo['description']);
-            $course->setRegisteredUsers($courseInfo['registered_users']);
-            $course->setPublicationDate($courseInfo['publication_date']);
-            $course->setImage($courseInfo['image']);
-            $course->setCategory($courseInfo['category']);
+            $course = new Course($courseInfo['name'], $courseInfo['description'], $courseInfo['registered_users'], $courseInfo['publication_date'], $courseInfo['image'], $courseInfo['category']);
             $manager->persist($course);
         }
 
