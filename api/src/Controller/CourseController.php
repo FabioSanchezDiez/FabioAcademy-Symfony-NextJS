@@ -7,7 +7,7 @@ use App\Service\CourseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class CourseController extends AbstractController
@@ -41,6 +41,24 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
+    #[Route('/courses/where/{condition}', name: 'courses_where', methods: ['GET'])]
+    public function coursesWhereRegisteredUsers(int $condition): Response
+    {
+        $courses = $this->courseRepository->findByRegisteredUsers($condition);
+        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
+    #[Route('/courses/like/{condition}', name: 'courses_like', methods: ['GET'])]
+    public function coursesLikeName(string $condition): Response
+    {
+        $courses = $this->courseRepository->findLikeName($condition);
+        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
     #[Route('/courses/create', name: 'courses_create', methods: ['POST'])]
     public function createCourse(CourseService $courseService, Request $request): Response
     {
@@ -50,24 +68,4 @@ class CourseController extends AbstractController
 
         return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
     }
-
-//    #[Route('/courses/dto/{id}', name: 'courses_id_dto', methods: ['GET'])]
-//    public function courseByIdDTO(AutoMapperService $mapper, int $id): Response
-//    {
-//        $course = $this->courseRepository->find($id);
-//        $courseDto= $mapper->mapCourse($course);
-//        $data = $this->serializer->serialize($courseDto, 'json', ['datetime_format' => 'Y-m-d']);
-//
-//        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
-//    }
-
-//    #[Route('/courses2', name: 'courses2', methods: ['POST'])]
-//    public function courses2(Request $request): Response
-//    {
-//        $courseData = json_decode($request->getContent(), true);
-//        $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], $courseData["publication_date"], $courseData["image"], $courseData["category"]);
-//        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
-//
-//        return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
-//    }
 }
