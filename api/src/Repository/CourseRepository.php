@@ -6,6 +6,7 @@ use App\DTO\CourseDTO;
 use App\Entity\Course;
 use App\Service\AutoMapperService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,7 +21,7 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CourseRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator, private AutoMapperService $mapper)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator, private AutoMapperService $mapper, private EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Course::class);
     }
@@ -63,6 +64,15 @@ class CourseRepository extends ServiceEntityRepository
             ->getResult();
 
         return $this->mapper->mapCourses($courses);
+    }
+
+    public function createCourse(array $courseData): Course
+    {
+        $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], new \DateTime($courseData["publication_date"]), $courseData["image"], $courseData["category"]);
+        $this->entityManager->persist($course);
+        $this->entityManager->flush();
+
+        return $course;
     }
 
 //    public function findOneBySomeField($value): ?Course

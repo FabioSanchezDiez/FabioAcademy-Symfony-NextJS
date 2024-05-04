@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\CourseRepository;
-use App\Service\CourseService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,10 +59,10 @@ class CourseController extends AbstractController
     }
 
     #[Route('/courses/create', name: 'courses_create', methods: ['POST'])]
-    public function createCourse(CourseService $courseService, Request $request): Response
+    public function createCourse(Request $request): Response
     {
         $courseData = json_decode($request->getContent(), true);
-        $course = $courseService->createCourse($courseData);
+        $course = $this->courseRepository->createCourse($courseData);
         $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
