@@ -51,6 +51,13 @@ class Course
     private Collection $users;
 
     /**
+     * @var Collection<int, Review>
+     */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'course', orphanRemoval: true)]
+    #[Ignore]
+    private Collection $reviews;
+
+    /**
      * @param string|null $name
      * @param string|null $description
      * @param int|null $registeredUsers
@@ -68,6 +75,7 @@ class Course
         $this->category = $category;
         $this->sections = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,6 +207,36 @@ class Course
     {
         if ($this->users->removeElement($user)) {
             $user->removeCourse($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getCourse() === $this) {
+                $review->setCourse(null);
+            }
         }
 
         return $this;
