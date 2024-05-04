@@ -8,7 +8,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserService
 {
-    public function __construct(private UserPasswordHasherInterface $passwordHasher, private UserRepository $userRepository){}
+    public function __construct(private UserPasswordHasherInterface $passwordHasher, private UserRepository $userRepository, private EmailService $emailService){}
 
     public function registerUser(array $userData): void
     {
@@ -23,6 +23,8 @@ class UserService
         $user->setPassword($hashedPassword);
 
         $this->userRepository->createUser($user);
+
+        $this->emailService->sendConfirmationEmail($user->getName(), $user->getEmail(), $user->getToken());
     }
 
     public function checkValidPassword(array $userData): bool
