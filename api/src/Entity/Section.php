@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SectionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
@@ -26,6 +28,12 @@ class Section
     private ?Course $course = null;
 
     /**
+     * @var Collection<int, Lesson>
+     */
+    #[ORM\OneToMany(targetEntity: Lesson::class, mappedBy: 'section', orphanRemoval: true)]
+    private Collection $lessons;
+
+    /**
      * @param string|null $title
      * @param int|null $sectionOrder
      * @param Course|null $course
@@ -35,6 +43,7 @@ class Section
         $this->title = $title;
         $this->sectionOrder = $sectionOrder;
         $this->course = $course;
+        $this->lessons = new ArrayCollection();
     }
 
 
@@ -75,6 +84,36 @@ class Section
     public function setCourse(?Course $course): static
     {
         $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Lesson>
+     */
+    public function getLessons(): Collection
+    {
+        return $this->lessons;
+    }
+
+    public function addLesson(Lesson $lesson): static
+    {
+        if (!$this->lessons->contains($lesson)) {
+            $this->lessons->add($lesson);
+            $lesson->setSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesson(Lesson $lesson): static
+    {
+        if ($this->lessons->removeElement($lesson)) {
+            // set the owning side to null (unless already changed)
+            if ($lesson->getSection() === $this) {
+                $lesson->setSection(null);
+            }
+        }
 
         return $this;
     }
