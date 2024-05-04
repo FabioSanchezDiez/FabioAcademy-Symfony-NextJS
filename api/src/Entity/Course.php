@@ -44,6 +44,13 @@ class Course
     private Collection $sections;
 
     /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'courses')]
+    #[Ignore]
+    private Collection $users;
+
+    /**
      * @param string|null $name
      * @param string|null $description
      * @param int|null $registeredUsers
@@ -60,6 +67,7 @@ class Course
         $this->image = $image;
         $this->category = $category;
         $this->sections = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +172,33 @@ class Course
             if ($section->getCourse() === $this) {
                 $section->setCourse(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCourse($this);
         }
 
         return $this;
