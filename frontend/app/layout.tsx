@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/src/fonts";
+import NavBar from "@/components/navigation/NavBar";
 
 export const metadata: Metadata = {
   title: "FabioCode - Academy",
@@ -21,6 +22,9 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className={`${inter.className} antialiased bg-gray-200 dark:bg-slate-900`}
       >
+        <header>
+          <NavBar></NavBar>
+        </header>
         {children}
       </body>
     </html>
