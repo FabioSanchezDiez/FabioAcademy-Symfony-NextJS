@@ -12,6 +12,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.0",
         "knplabs/knp-paginator-bundle": "^6.3",
+        "lexik/jwt-authentication-bundle": "^2.21",
         "mark-gerarts/automapper-plus-bundle": "1.5",
         "nelmio/cors-bundle": "^2.4",
         "symfony/console": "6.4.*",
