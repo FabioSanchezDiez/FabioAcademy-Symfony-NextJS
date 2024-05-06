@@ -17,7 +17,7 @@ export default function NavBar() {
       </Link>
       <NavLinks />
       <SearchBar />
-      <ThemeSwitch></ThemeSwitch>
+      <ThemeSwitch />
     </nav>
   );
 }
