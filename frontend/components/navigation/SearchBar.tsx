@@ -21,7 +21,7 @@ export default function SearchBar() {
         </svg>
       </button>
       <input
-        className="input bg-gray-200 dark:bg-slate-700 dark:text-gray-100 rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 transition-all duration-300 shadow-xl"
+        className="input bg-gray-200 dark:bg-slate-700 dark:text-gray-100 rounded-full px-8 py-3 border-2 border-transparent focus:outline-none focus:border-blue-500 placeholder-gray-400 shadow-xl"
         placeholder="Buscar cursos..."
         required
         type="text"
