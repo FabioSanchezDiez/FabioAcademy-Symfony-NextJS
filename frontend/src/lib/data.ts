@@ -1,7 +1,10 @@
+import { unstable_noStore } from "next/cache";
+
 export async function fetchPopularCourses() {
   try {
     //Forced await simulation
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
+    unstable_noStore();
     const res = await fetch("http://localhost:8000/courses/where/15000");
     const data = await res.json();
     console.log(data);
