@@ -3,7 +3,7 @@ import Button from "../ui/Button";
 
 export default function Hero() {
   return (
-    <section className="container px-16 grid md:grid-cols-2 max-md:mt-8">
+    <section className="container px-16 grid lg:grid-cols-2 max-lg:mt-8">
       <div className="flex flex-col justify-center items-start">
         <h1 className="text-5xl font-black text-darkenLightBlue leading-[115%] mb-8">
           Aprende programación
