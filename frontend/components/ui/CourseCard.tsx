@@ -1,7 +1,6 @@
 import { CourseItem } from "@/src/lib/definitions";
 import Image from "next/image";
 import Link from "next/link";
-import TagBlue from "./TagBlue";
 import TagYellow from "./TagYellow";
 
 export default function CourseCard({
@@ -16,7 +15,7 @@ export default function CourseCard({
   return (
     <>
       <Link href={`/courses/${id}`}>
-        <article className="p-4 bg-white dark:bg-slate-800 rounded-lg shadow-2xl grid grid-cols-3 border-slate-600">
+        <article className="p-4 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl grid grid-cols-3 gap-4 border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700">
           <div className="col-span-1">
             <Image
               src={image}
@@ -27,7 +26,7 @@ export default function CourseCard({
             ></Image>
           </div>
           <div className="col-span-2">
-            <p className="text-2xl font-bold">{name}</p>
+            <p className=" text-lg font-bold">{name}</p>
             <div className="flex gap-4 mt-4">{isPopularCourse}</div>
           </div>
         </article>

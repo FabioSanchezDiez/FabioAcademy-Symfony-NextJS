@@ -2,10 +2,10 @@ import { fetchPopularCourses } from "@/src/lib/data";
 import CourseCard from "../ui/CourseCard";
 import { CourseItem } from "@/src/lib/definitions";
 
-export default async function PopularCourses() {
+export default async function Courses() {
   const courses = await fetchPopularCourses();
   return (
-    <section className="container flex flex-col lg:grid lg:grid-cols-2 gap-6">
+    <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6">
       {courses.map((c: CourseItem) => (
         <CourseCard
           key={c.id}
