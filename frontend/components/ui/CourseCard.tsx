@@ -23,15 +23,12 @@ export default function CourseCard({
               alt="Course Logo"
               width={200}
               height={200}
-              className="rounded-lg"
+              className="rounded-lg shadow-2xl"
             ></Image>
           </div>
           <div className="col-span-2">
             <p className="text-2xl font-bold">{name}</p>
-            <div className="flex gap-4 mt-4">
-              <TagBlue text={registeredUsers} />
-              {isPopularCourse}
-            </div>
+            <div className="flex gap-4 mt-4">{isPopularCourse}</div>
           </div>
         </article>
       </Link>
