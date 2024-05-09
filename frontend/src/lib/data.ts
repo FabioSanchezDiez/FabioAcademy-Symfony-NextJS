@@ -15,3 +15,19 @@ export async function fetchPopularCourses() {
     throw new Error("Failed to fetch courses data");
   }
 }
+
+export async function fetchCourse(id: number) {
+  try {
+    //Forced await simulation
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
+    unstable_noStore();
+    const res = await fetch(`http://localhost:8000/courses/${id}`);
+    const data = await res.json();
+    console.log(data);
+
+    return data;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch courses data");
+  }
+}
