@@ -31,7 +31,7 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[Route('/courses/{id}', name: 'courses_id', methods: ['GET'])]
+    #[Route('/courses/id/{id}', name: 'courses_id', methods: ['GET'])]
     public function courseById(int $id): Response
     {
         $course = $this->courseRepository->find($id);
@@ -54,6 +54,15 @@ class CourseController extends AbstractController
     {
         $courses = $this->courseRepository->findLikeName($condition);
         $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
+    #[Route('/courses/popular', name: 'courses_most_popular', methods: ['GET'])]
+    public function mostPopularCourse(): Response
+    {
+        $course = $this->courseRepository->findMostPopularCourse();
+        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }

@@ -66,6 +66,16 @@ class CourseRepository extends ServiceEntityRepository
         return $this->mapper->mapCourses($courses);
     }
 
+    public function findMostPopularCourse(): ?Course
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.registeredUsers', 'DESC')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
+    }
+
     public function createCourse(array $courseData): Course
     {
         $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], new \DateTime($courseData["publication_date"]), $courseData["image"], $courseData["category"]);
@@ -74,14 +84,4 @@ class CourseRepository extends ServiceEntityRepository
 
         return $course;
     }
-
-//    public function findOneBySomeField($value): ?Course
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

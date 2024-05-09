@@ -90,7 +90,7 @@ class CourseFixtures extends Fixture
             [
                 'name' => 'ReactJS Avanzado - Construyendo Interfaces Interactivas',
                 'description' => 'Conviértete en un experto en ReactJS con este curso avanzado. Aprenderás a construir interfaces de usuario interactivas y dinámicas utilizando ReactJS. Explora conceptos avanzados como el manejo de estados, el enrutamiento y la gestión de formularios para crear aplicaciones web modernas.',
-                'registered_users' => 10000,
+                'registered_users' => 64300,
                 'publication_date' => new \DateTime('2024-01-21'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FReact%20Curso.png?alt=media&token=7fcb9fe2-0465-4a05-ab44-2612607742fb',
                 'category' => 'Desarrollo Web',
