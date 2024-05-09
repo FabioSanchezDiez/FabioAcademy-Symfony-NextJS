@@ -5,7 +5,7 @@ import CoursePanel from "../ui/CoursePanel";
 export default async function BestCourse() {
   const course: Course = await fetchCourse(9);
   return (
-    <section>
+    <section className="max-sm:px-4">
       <CoursePanel
         id={course.id}
         name={course.name}
