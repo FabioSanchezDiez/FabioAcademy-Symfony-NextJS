@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import CoursesSkeleton from "@/components/skeletons/CoursesSkeleton";
 import BestCourse from "@/components/home/BestCourse";
 import CoursePanelSkeleton from "@/components/skeletons/CoursePanelSkeleton";
+import InfoDivider from "@/components/ui/InfoDivider";
+import Button from "@/components/ui/Button";
 
 export default function Home() {
   return (
@@ -17,6 +19,24 @@ export default function Home() {
         <Suspense fallback={<CoursesSkeleton />}>
           <PopularCourses></PopularCourses>
         </Suspense>
+
+        <div className="mt-16 mb-12 p-2">
+          <InfoDivider>
+            <div>
+              <p className="p-8 text-slate-50">
+                <span className="font-bold text-lg">¿Eres profesor?</span>{" "}
+                Regístrate para poder comenzar a subir tus cursos.
+              </p>
+            </div>
+            <div className="pr-8">
+              <Button
+                textContent="Registrarse como profesor"
+                bgColor="bg-darkenLightBlue"
+                textColor="text-white"
+              ></Button>
+            </div>
+          </InfoDivider>
+        </div>
 
         <h2 className="mb-6 text-2xl font-bold ml-2 mt-10">
           Nuestra mejor recomendación para los usuarios
