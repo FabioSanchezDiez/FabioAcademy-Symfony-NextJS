@@ -31,7 +31,7 @@ class JWTEventSubscriber implements EventSubscriberInterface
     {
         $code = Response::HTTP_UNAUTHORIZED;
         $response = new JsonResponse([
-            "message" => "Las credenciales son incorrectas",
+            "error" => "Las credenciales son incorrectas",
             "code" => $code
         ], $code);
 
