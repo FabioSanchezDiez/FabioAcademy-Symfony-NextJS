@@ -16,7 +16,7 @@ export default function Page() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${"coloque-un-token-valido"}`,
+          Authorization: `Bearer ${session?.user?.token}`,
         },
       }
     );
