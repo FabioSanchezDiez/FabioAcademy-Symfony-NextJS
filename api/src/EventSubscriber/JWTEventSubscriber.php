@@ -19,6 +19,11 @@ class JWTEventSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if (!$user->isConfirmed()) {
+            $event->setData(["error" => "Usuario no confirmado"]);
+            return;
+        }
+
         $data = array_merge(
             ["name" => $user->getName(), "email" => $user->getEmail()],
             $event->getData()

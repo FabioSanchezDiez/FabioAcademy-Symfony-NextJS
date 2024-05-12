@@ -24,7 +24,7 @@ export default function Page() {
     });
 
     if (responseNextAuth?.status === 401) {
-      setErrors(["Las credenciales son incorrectas o el usuario no existe"]);
+      setErrors(["Credenciales incorrectas o el usuario no esta confirmado"]);
       setIsLoading(false);
       return;
     }
