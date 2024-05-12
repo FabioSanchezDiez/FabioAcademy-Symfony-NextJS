@@ -10,7 +10,7 @@ type FormProps = {
   errors: string[];
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
-  setName?: () => void;
+  setName?: (name: string) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
 };
 
@@ -33,7 +33,9 @@ export default function Form({
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-slate-100">
-            Iniciar sesión con tu cuenta
+            {isRegister
+              ? "Registrate en la plataforma"
+              : "Iniciar sesión con tu cuenta"}
           </h2>
           {errors.length > 0 && (
             <div className="bg-red-400 p-2 text-sm rounded-md mt-4">
@@ -44,6 +46,28 @@ export default function Form({
 
         <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={handleSubmit}>
+            {isRegister && (
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200"
+                >
+                  Nombre de usuario
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    autoComplete="name"
+                    required
+                    className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-800 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-darkenLightBlue sm:text-sm sm:leading-6"
+                    value={name}
+                    onChange={(e) => setName!(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
             <div>
               <label
                 htmlFor="email"
@@ -71,15 +95,17 @@ export default function Form({
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-200"
                 >
-                  Password
+                  Contraseña
                 </label>
                 <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-darkenLightBlue hover:text-lightBlue"
-                  >
-                    ¿Olvidate tu contraseña?
-                  </a>
+                  {!isRegister && (
+                    <a
+                      href="#"
+                      className="font-semibold text-darkenLightBlue hover:text-lightBlue"
+                    >
+                      ¿Olvidate tu contraseña?
+                    </a>
+                  )}
                 </div>
               </div>
               <div className="mt-2">
@@ -107,12 +133,12 @@ export default function Form({
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500 dark:text-slate-300">
-            ¿Eres nuevo?{" "}
+            {isRegister ? "¿Ya tienes una cuenta?" : "¿Eres nuevo?"}{" "}
             <Link
-              href="/register"
+              href={`${isRegister ? "/login" : "/register"}`}
               className="font-semibold leading-6 text-darkenLightBlue hover:text-lightBlue"
             >
-              Registrate pulsando aquí.
+              {isRegister ? "Iniciar sesión" : "Registrarse"}
             </Link>
           </p>
         </div>

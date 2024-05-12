@@ -32,7 +32,9 @@ export default function NavLinks() {
       ) : (
         <>
           <Link href={"/login"}>
-            <p className="dark:text-slate-400">Iniciar Sesión</p>
+            <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap">
+              Iniciar Sesión
+            </p>
           </Link>
           <Link href={"/register"}>
             <p className="dark:text-slate-400">Registrarse</p>
