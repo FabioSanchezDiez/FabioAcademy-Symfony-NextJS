@@ -11,6 +11,7 @@ export default function Page() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,12 +41,21 @@ export default function Page() {
       setIsLoading(false);
       return;
     }
-
-    router.push("/login");
+    setIsLoading(false);
+    setIsSuccess(true);
+    setTimeout(() => {
+      router.push("/login");
+    }, 3000);
   };
 
   return (
     <>
+      {isSuccess && (
+        <div className="bg-green-500 p-2 text-black text-lg font-bold rounded-md mt-12 text-center">
+          Registrado con éxito, confirma tu cuenta en el correo que
+          proporcionaste para empezar a usar la plataforma
+        </div>
+      )}
       <Form
         name={name}
         email={email}
