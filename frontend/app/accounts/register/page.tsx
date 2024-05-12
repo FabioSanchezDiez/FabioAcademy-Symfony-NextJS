@@ -44,7 +44,7 @@ export default function Page() {
     setIsLoading(false);
     setIsSuccess(true);
     setTimeout(() => {
-      router.push("/login");
+      router.push("/accounts/login");
     }, 3000);
   };
 

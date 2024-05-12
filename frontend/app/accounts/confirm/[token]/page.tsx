@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { token: string } }) {
     setIsLoading(false);
     setIsSuccess(true);
     setTimeout(() => {
-      router.push("/login");
+      router.push("/accounts/login");
     }, 3000);
   };
 

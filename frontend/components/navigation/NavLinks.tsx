@@ -3,12 +3,6 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
-const links = [
-  { name: "Inicio", href: "/" },
-  { name: "Cursos", href: "/courses" },
-  { name: "Entrar", href: "/login" },
-];
-
 export default function NavLinks() {
   const { data: session } = useSession();
 
@@ -31,12 +25,12 @@ export default function NavLinks() {
         </>
       ) : (
         <>
-          <Link href={"/login"}>
+          <Link href={"/accounts/login"}>
             <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap">
               Iniciar Sesión
             </p>
           </Link>
-          <Link href={"/register"}>
+          <Link href={"/accounts/register"}>
             <p className="dark:text-slate-400">Registrarse</p>
           </Link>
         </>

@@ -135,7 +135,7 @@ export default function Form({
           <p className="mt-10 text-center text-sm text-gray-500 dark:text-slate-300">
             {isRegister ? "¿Ya tienes una cuenta?" : "¿Eres nuevo?"}{" "}
             <Link
-              href={`${isRegister ? "/login" : "/register"}`}
+              href={`${isRegister ? "/accounts/login" : "/accounts/register"}`}
               className="font-semibold leading-6 text-darkenLightBlue hover:text-lightBlue"
             >
               {isRegister ? "Iniciar sesión" : "Registrarse"}
