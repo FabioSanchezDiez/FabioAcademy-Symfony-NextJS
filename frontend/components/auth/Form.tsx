@@ -1,37 +1,31 @@
-"use client";
-
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import Loader from "../ui/Loader";
+import Link from "next/link";
 
-export default function LoginForm() {
-  const [errors, setErrors] = useState<string[]>([]);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+type FormProps = {
+  name?: string;
+  email: string;
+  password: string;
+  isLoading: boolean;
+  isRegister: boolean;
+  errors: string[];
+  setEmail: (email: string) => void;
+  setPassword: (password: string) => void;
+  setName?: () => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+};
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setErrors([]);
-
-    const responseNextAuth = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    if (responseNextAuth?.status === 401) {
-      setErrors(["Las credenciales son incorrectas o el usuario no existe"]);
-      setIsLoading(false);
-      return;
-    }
-
-    router.push("/dashboard");
-  };
-
+export default function Form({
+  name,
+  email,
+  password,
+  isLoading,
+  isRegister,
+  errors,
+  setEmail,
+  setPassword,
+  setName,
+  handleSubmit,
+}: FormProps) {
   return (
     <>
       {isLoading && <Loader></Loader>}
@@ -114,12 +108,12 @@ export default function LoginForm() {
 
           <p className="mt-10 text-center text-sm text-gray-500 dark:text-slate-300">
             ¿Eres nuevo?{" "}
-            <a
-              href="#"
+            <Link
+              href="/register"
               className="font-semibold leading-6 text-darkenLightBlue hover:text-lightBlue"
             >
               Registrate pulsando aquí.
-            </a>
+            </Link>
           </p>
         </div>
       </div>
