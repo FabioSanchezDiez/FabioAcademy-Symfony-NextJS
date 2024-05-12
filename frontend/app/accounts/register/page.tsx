@@ -1,6 +1,7 @@
 "use client";
 
 import Form from "@/components/auth/Form";
+import { registerUser } from "@/src/lib/data";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,24 +20,9 @@ export default function Page() {
     setIsLoading(true);
     setErrors([]);
 
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/create`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      }
-    );
+    const res = await registerUser(name, email, password);
 
-    const responseAPI = await res.json();
-
-    if (!res.ok) {
+    if (res.error) {
       setErrors(["Error al crear el usuario"]);
       setIsLoading(false);
       return;

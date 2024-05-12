@@ -127,7 +127,7 @@ export default function Form({
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-darkenLightBlue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lightBlue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-darkenLightBlue"
               >
-                Iniciar Sesión
+                {isRegister ? "Registarse" : "Iniciar Sesión"}
               </button>
             </div>
           </form>
