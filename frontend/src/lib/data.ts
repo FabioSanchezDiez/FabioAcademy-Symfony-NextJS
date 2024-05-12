@@ -11,7 +11,6 @@ export async function fetchPopularCourses() {
 
     return data;
   } catch (err) {
-    console.log(err);
     throw new Error("Failed to fetch courses data");
   }
 }
@@ -27,7 +26,6 @@ export async function fetchMostPopularCourse() {
 
     return data;
   } catch (err) {
-    console.log(err);
     throw new Error("Failed to fetch courses data");
   }
 }
@@ -43,7 +41,20 @@ export async function fetchCourseById(id: number) {
 
     return data;
   } catch (err) {
-    console.log(err);
+    throw new Error("Failed to fetch courses data");
+  }
+}
+
+export async function confirmUser(token: string) {
+  try {
+    //Forced await simulation
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
+    unstable_noStore();
+    const res = await fetch(`http://localhost:8000/users/confirm/${token}`, {method: "PUT", headers: {"Content-Type": "application/json"}});
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
     throw new Error("Failed to fetch courses data");
   }
 }
