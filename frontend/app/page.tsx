@@ -6,12 +6,10 @@ import BestCourse from "@/components/home/BestCourse";
 import CoursePanelSkeleton from "@/components/skeletons/CoursePanelSkeleton";
 import InfoDivider from "@/components/ui/InfoDivider";
 import Button from "@/components/ui/Button";
-import ButtonAuth from "@/components/auth/ButtonAuth";
 
 export default function Home() {
   return (
     <>
-      <ButtonAuth></ButtonAuth>
       <Hero></Hero>
       <section className="container mt-2">
         <h2 className="mb-6 text-2xl font-bold ml-2">

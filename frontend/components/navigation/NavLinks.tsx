@@ -1,3 +1,6 @@
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 const links = [
@@ -7,15 +10,35 @@ const links = [
 ];
 
 export default function NavLinks() {
+  const { data: session } = useSession();
+
   return (
     <>
-      {links.map((link) => {
-        return (
-          <Link key={link.name} href={link.href}>
-            <p className="dark:text-slate-400">{link.name}</p>
+      <Link href={"/"}>
+        <p className="dark:text-slate-400">Inicio</p>
+      </Link>
+      <Link href={"/courses"}>
+        <p className="dark:text-slate-400">Cursos</p>
+      </Link>
+      {session?.user ? (
+        <>
+          <Link href={"/dashboard"}>
+            <p className="dark:text-slate-400">Dashboard</p>
           </Link>
-        );
-      })}
+          <button onClick={() => signOut()}>
+            <p className="dark:text-slate-400">Cerrar Sesión</p>
+          </button>
+        </>
+      ) : (
+        <>
+          <Link href={"/login"}>
+            <p className="dark:text-slate-400">Iniciar Sesión</p>
+          </Link>
+          <Link href={"/register"}>
+            <p className="dark:text-slate-400">Registrarse</p>
+          </Link>
+        </>
+      )}
     </>
   );
 }

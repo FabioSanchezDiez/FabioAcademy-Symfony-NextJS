@@ -64,7 +64,7 @@ export default function LoginForm() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-800 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-darkenLightBlue sm:text-sm sm:leading-6"
+                  className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-800 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-darkenLightBlue sm:text-sm sm:leading-6"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -95,7 +95,7 @@ export default function LoginForm() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-800 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-darkenLightBlue sm:text-sm sm:leading-6"
+                  className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 dark:bg-slate-800 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-slate-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-darkenLightBlue sm:text-sm sm:leading-6"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
