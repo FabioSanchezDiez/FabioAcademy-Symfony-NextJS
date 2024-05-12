@@ -3,6 +3,7 @@ import "./globals.css";
 import { inter } from "@/src/fonts";
 import NavBar from "@/components/navigation/NavBar";
 import { SessionAuthProvider, ThemeAppProvider } from "./providers";
+import Footer from "@/components/ui/Footer";
 
 export const metadata: Metadata = {
   title: "FabioCode - Academy",
@@ -20,14 +21,13 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning={true}>
       <body
-        className={`${inter.className} antialiased bg-gray-200 dark:bg-slate-900`}
+        className={`${inter.className} antialiased bg-gray-200 dark:bg-slate-900 min-h-screen`}
       >
         <ThemeAppProvider>
           <SessionAuthProvider>
-            <header>
-              <NavBar></NavBar>
-            </header>
+            <NavBar></NavBar>
             {children}
+            <Footer></Footer>
           </SessionAuthProvider>
         </ThemeAppProvider>
       </body>
