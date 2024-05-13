@@ -20,6 +20,7 @@ class UserFixtures extends Fixture
             $user->setPassword($userInfo['password']);
             $user->setAdmin($userInfo['isAdmin']);
             $user->setConfirmed($userInfo['isConfirmed']);
+            $user->setRoles($userInfo['roles']);
             $manager->persist($user);
         }
 
@@ -34,14 +35,16 @@ class UserFixtures extends Fixture
                 'email' => 'fabiocode@gmail.com',
                 'password' => '$2a$10$VkQsctMldlG9LJW6vV68pezIfMQd0Mu91.Kb.IaIHMkU653sgDSsm',
                 'isAdmin' => false,
-                'isConfirmed' => true
+                'isConfirmed' => true,
+                'roles' => ["ROLE_USER"]
             ],
             [
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
                 'password' => '$2a$10$MnL34SeVKYvvE5SSvtM7wuTODgg4uzyGOfjrl0Ln4XLZE7o7w1cbm',
                 'isAdmin' => true,
-                'isConfirmed' => false
+                'isConfirmed' => false,
+                'roles' => ["ROLE_USER", "ROLE_ADMIN"]
             ]
         ];
     }
