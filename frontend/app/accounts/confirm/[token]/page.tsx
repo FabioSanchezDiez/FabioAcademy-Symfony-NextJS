@@ -4,11 +4,11 @@ import Loader from "@/components/ui/Loader";
 import { confirmUser } from "@/src/lib/data";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Page({ params }: { params: { token: string } }) {
   const [errors, setErrors] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
 
   const handleConfirmUser = async () => {
@@ -21,7 +21,24 @@ export default function Page({ params }: { params: { token: string } }) {
       return;
     }
     setIsLoading(false);
-    setIsSuccess(true);
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Cuenta confirmada",
+      text: "Redirigiendo al login para empezar a usar la plataforma",
+    });
+
     setTimeout(() => {
       router.push("/accounts/login");
     }, 3000);
@@ -30,11 +47,6 @@ export default function Page({ params }: { params: { token: string } }) {
   return (
     <>
       {isLoading && <Loader></Loader>}
-      {isSuccess && (
-        <div className="bg-green-500 p-2 text-black text-lg font-bold rounded-md mt-12 text-center">
-          Cuenta confirmada con éxito, redirigendo al login.
-        </div>
-      )}
       <div className="flex justify-center flex-col items-center gap-4 mt-20 p-4">
         {errors.length > 0 && (
           <div className="bg-red-400 p-2 text-sm rounded-md my-4">

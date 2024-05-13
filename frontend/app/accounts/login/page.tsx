@@ -4,6 +4,7 @@ import Form from "@/components/auth/Form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 export default function Page() {
   const [errors, setErrors] = useState<string[]>([]);
@@ -28,8 +29,24 @@ export default function Page() {
       setIsLoading(false);
       return;
     }
-
-    router.push("/dashboard");
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Sesión iniciada",
+    });
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 2000);
   };
 
   return (
