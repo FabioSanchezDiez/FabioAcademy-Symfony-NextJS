@@ -82,3 +82,22 @@ export async function confirmUser(token: string) {
     throw new Error("Failed to fetch courses data");
   }
 }
+
+export async function checkSessionStatus(token: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if(data.code === 401) throw new Error("Expired JWT token")
+  } catch (err) {
+    throw new Error("Error inesperado");
+  }
+}

@@ -6,7 +6,7 @@ type InfoDividerProps = {
 
 export default function InfoDivider({ children }: InfoDividerProps) {
   return (
-    <section className="bg-zinc-800 dark:bg-slate-700 flex justify-between items-center">
+    <section className="bg-zinc-800 dark:bg-slate-800 flex justify-between items-center">
       {children}
     </section>
   );

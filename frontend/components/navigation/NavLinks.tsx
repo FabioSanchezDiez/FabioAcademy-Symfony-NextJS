@@ -1,10 +1,24 @@
 "use client";
 
+import { checkSessionStatus } from "@/src/lib/data";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function NavLinks() {
   const { data: session } = useSession();
+  const checkSessionIntervalMS = 300000;
+
+  useEffect(() => {
+    if (session?.user) {
+      const interval = setInterval(() => {
+        checkSessionStatus(session?.user.token).catch(() => {
+          signOut();
+        });
+      }, checkSessionIntervalMS);
+      return () => clearInterval(interval);
+    }
+  });
 
   return (
     <>

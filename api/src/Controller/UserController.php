@@ -37,4 +37,9 @@ class UserController extends AbstractController
 
         return new Response($response, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
     }
+
+    #[Route('/auth/check', name: 'auth_check', methods: ['GET'])]
+    public function checkSessionStatus(): Response{
+        return new Response(true ,Response::HTTP_OK);
+    }
 }
