@@ -40,10 +40,10 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[Route('/courses/where/{condition}', name: 'courses_where', methods: ['GET'])]
-    public function coursesWhereRegisteredUsers(int $condition): Response
+    #[Route('/courses/between/{min}/{max}/{maxResults}', name: 'courses_between', methods: ['GET'])]
+    public function coursesBetweenRegisteredUsers(int $min, int $max, int $maxResults): Response
     {
-        $courses = $this->courseRepository->findByRegisteredUsers($condition);
+        $courses = $this->courseRepository->findByRegisteredUsers($min, $max, $maxResults);
         $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);

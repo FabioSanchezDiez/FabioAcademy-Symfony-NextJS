@@ -2,14 +2,13 @@ import { unstable_noStore } from "next/cache";
 
 
 // COURSES ENDPOINTS
-export async function fetchPopularCourses() {
+export async function fetchPopularCourses(min: number, max: number, maxResults: number) {
   try {
     //Forced await simulation
     //await new Promise((resolve) => setTimeout(resolve, 3000));
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/where/15000`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/between/${min}/${max}/${maxResults}`);
     const data = await res.json();
-    console.log(data);
 
     return data;
   } catch (err) {
@@ -24,7 +23,6 @@ export async function fetchMostPopularCourse() {
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/popular`);
     const data = await res.json();
-    console.log(data);
 
     return data;
   } catch (err) {
@@ -39,7 +37,6 @@ export async function fetchCourseById(id: number) {
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/id/${id}`);
     const data = await res.json();
-    console.log(data);
 
     return data;
   } catch (err) {
@@ -68,7 +65,7 @@ export async function registerUser(name: string, email: string, password: string
     const data = await res.json();
     return data;
   } catch (err) {
-    throw new Error("Failed to fetch courses data");
+    throw new Error("Failed to register the user");
   }
 }
 
@@ -79,7 +76,7 @@ export async function confirmUser(token: string) {
 
     return data;
   } catch (err) {
-    throw new Error("Failed to fetch courses data");
+    throw new Error("Failed to confirm the user");
   }
 }
 
@@ -98,6 +95,6 @@ export async function checkSessionStatus(token: string) {
     const data = await res.json();
     if(data.code === 401) throw new Error("Expired JWT token")
   } catch (err) {
-    throw new Error("Error inesperado");
+    throw new Error("Unexpected error");
   }
 }

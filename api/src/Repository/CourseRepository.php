@@ -49,12 +49,14 @@ class CourseRepository extends ServiceEntityRepository
     /**
      * @return CourseDTO[] Returns an array of Course objects
      */
-    public function findByRegisteredUsers(int $value): array
+    public function findByRegisteredUsers(int $min, int $max, int $maxResults): array
     {
         $courses = $this->createQueryBuilder('c')
-            ->where('c.registeredUsers >= :val')
-            ->setParameter('val', $value)
-            ->setMaxResults(6)
+            ->where('c.registeredUsers >= :min')
+            ->andWhere('c.registeredUsers <= :max')
+            ->setParameter('min', $min)
+            ->setParameter('max', $max)
+            ->setMaxResults($maxResults)
             ->getQuery()
             ->getResult();
 
