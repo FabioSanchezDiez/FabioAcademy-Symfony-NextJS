@@ -29,12 +29,21 @@ class CourseRepository extends ServiceEntityRepository
     /**
      * @param int $page
      * @param int $pageSize
-     * @return PaginationInterface Returns an array of Course objects paginated
+     * @return array Returns an array of Course objects paginated
      */
-    public function findAllPaginated(int $page, int $pageSize): PaginationInterface
+    public function findAllPaginated(int $page, int $pageSize): array
     {
         $query = $this->createQueryBuilder('c')->getQuery();
-        return $this->paginator->paginate($query, $page, $pageSize);
+        $pagination = $this->paginator->paginate($query, $page, $pageSize);
+        $courses = $pagination->getItems();
+        $currentPage = $pagination->getCurrentPageNumber();
+        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
+
+        return [
+            'courses' => $courses,
+            'currentPage' => $currentPage,
+            'totalPages' => intval(ceil($totalPages)),
+        ];
     }
 
     /**
