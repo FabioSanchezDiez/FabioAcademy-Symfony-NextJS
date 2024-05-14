@@ -6,6 +6,7 @@ import BestCourse from "@/components/home/BestCourse";
 import CoursePanelSkeleton from "@/components/skeletons/CoursePanelSkeleton";
 import InfoDivider from "@/components/ui/InfoDivider";
 import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -29,11 +30,13 @@ export default function Home() {
               </p>
             </div>
             <div className="pr-8">
-              <Button
-                textContent="Registrarse como profesor"
-                bgColor="bg-darkenLightBlue"
-                textColor="text-white"
-              ></Button>
+              <Link href={"/accounts/register"}>
+                <Button
+                  textContent="Registrarse como profesor"
+                  bgColor="bg-darkenLightBlue"
+                  textColor="text-white"
+                ></Button>
+              </Link>
             </div>
           </InfoDivider>
         </div>

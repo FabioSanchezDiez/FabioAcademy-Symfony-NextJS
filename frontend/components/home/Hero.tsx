@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "../ui/Button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -16,11 +17,13 @@ export default function Hero() {
           puedas aprender desarrollo de software de manera gratuita y con cursos
           de gran calidad.
         </p>
-        <Button
-          textContent="Únete a nuestra comunidad"
-          bgColor="bg-darkenLightBlue"
-          textColor="text-white"
-        ></Button>
+        <Link href={"/accounts/login"} className="w-full">
+          <Button
+            textContent="Únete a nuestra comunidad"
+            bgColor="bg-darkenLightBlue"
+            textColor="text-white"
+          ></Button>
+        </Link>
       </div>
       <div className="block mx-auto">
         <Image
