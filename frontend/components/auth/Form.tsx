@@ -1,4 +1,4 @@
-import Loader from "../ui/Loader";
+import Loader from "../ui/elements/Loader";
 import Link from "next/link";
 
 type FormProps = {

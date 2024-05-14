@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Button from "../ui/Button";
+import Button from "../ui/elements/Button";
 import Link from "next/link";
 
 export default function Hero() {

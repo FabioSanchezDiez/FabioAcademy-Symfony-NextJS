@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/ui/Button";
-import Loader from "@/components/ui/Loader";
+import Loader from "@/components/ui/elements/Loader";
 import { confirmUser } from "@/src/lib/data";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

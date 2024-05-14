@@ -1,7 +1,7 @@
 import { CourseItem } from "@/src/lib/definitions";
 import Image from "next/image";
 import Link from "next/link";
-import TagYellow from "./TagYellow";
+import TagYellow from "../elements/TagYellow";
 
 export default function CourseCard({
   id,

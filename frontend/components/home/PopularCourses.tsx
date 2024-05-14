@@ -1,5 +1,5 @@
 import { fetchPopularCourses } from "@/src/lib/data";
-import CourseCard from "../ui/CourseCard";
+import CourseCard from "../ui/courses/CourseCard";
 import { CourseItem } from "@/src/lib/definitions";
 
 export default async function PopularCourses() {

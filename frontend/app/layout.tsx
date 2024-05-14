@@ -3,7 +3,7 @@ import "./globals.css";
 import { inter } from "@/src/fonts";
 import NavBar from "@/components/navigation/NavBar";
 import { SessionAuthProvider, ThemeAppProvider } from "./providers";
-import Footer from "@/components/ui/Footer";
+import Footer from "@/components/ui/structure/Footer";
 
 export const metadata: Metadata = {
   title: "FabioCode - Academy",

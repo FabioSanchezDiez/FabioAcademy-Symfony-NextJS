@@ -1,6 +1,6 @@
 import { fetchMostPopularCourse } from "@/src/lib/data";
 import { Course } from "@/src/lib/definitions";
-import CoursePanel from "../ui/CoursePanel";
+import CoursePanel from "../ui/courses/CoursePanel";
 
 export default async function BestCourse() {
   const course: Course = await fetchMostPopularCourse();
