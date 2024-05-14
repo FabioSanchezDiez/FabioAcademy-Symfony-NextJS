@@ -5,7 +5,7 @@ import CoursesSkeleton from "@/components/skeletons/CoursesSkeleton";
 import BestCourse from "@/components/home/BestCourse";
 import CoursePanelSkeleton from "@/components/skeletons/CoursePanelSkeleton";
 import InfoDivider from "@/components/ui/structure/InfoDivider";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/elements/Button";
 import Link from "next/link";
 
 export default function Home() {

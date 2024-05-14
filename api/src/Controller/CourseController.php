@@ -31,6 +31,16 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
+    #[Route('/courses/paginated/filter/{page}/{size}', name: 'courses_paginated_filter', methods: ['POST'])]
+    public function coursesPaginatedFilter(Request $request, int $page, int $size): Response
+    {
+        $categories = json_decode($request->getContent(), true)["categories"];
+        $courses = $this->courseRepository->findPaginatedFilter($page,$size, $categories);
+        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
     #[Route('/courses/id/{id}', name: 'courses_id', methods: ['GET'])]
     public function courseById(int $id): Response
     {

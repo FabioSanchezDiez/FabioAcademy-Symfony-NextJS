@@ -34,7 +34,9 @@ export default function NavLinks() {
             <p className="dark:text-slate-400">Dashboard</p>
           </Link>
           <button onClick={() => signOut()}>
-            <p className="dark:text-slate-400">Cerrar Sesión</p>
+            <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap">
+              Cerrar Sesión
+            </p>
           </button>
         </>
       ) : (

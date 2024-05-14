@@ -30,6 +30,20 @@ export async function fetchMostPopularCourse() {
   }
 }
 
+export async function fetchCoursesPaginated(page: number, maxElements: number) {
+  try {
+    //Forced await simulation
+    //await new Promise((resolve) => setTimeout(resolve, 3000));
+    unstable_noStore();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`);
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to fetch courses data");
+  }
+}
+
 export async function fetchCourseById(id: number) {
   try {
     //Forced await simulation

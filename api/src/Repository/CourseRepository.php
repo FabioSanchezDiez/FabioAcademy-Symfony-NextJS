@@ -46,6 +46,24 @@ class CourseRepository extends ServiceEntityRepository
         ];
     }
 
+    public function findPaginatedFilter(int $page, int $pageSize, array $categories): array{
+
+        $query = $this->createQueryBuilder('c')
+            ->where('c.category IN (:categories)')
+            ->setParameter('categories', $categories)
+            ->getQuery();
+        $pagination = $this->paginator->paginate($query, $page, $pageSize);
+        $courses = $pagination->getItems();
+        $currentPage = $pagination->getCurrentPageNumber();
+        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
+
+        return [
+            'courses' => $courses,
+            'currentPage' => $currentPage,
+            'totalPages' => intval(ceil($totalPages)),
+        ];
+    }
+
     /**
      * @return CourseDTO[] Returns an array of Course objects
      */
