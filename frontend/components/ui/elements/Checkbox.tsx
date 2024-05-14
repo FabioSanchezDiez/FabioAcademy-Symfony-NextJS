@@ -7,7 +7,7 @@ export default function Checkbox({ label }: CheckboxProps) {
     <div className="flex justify-between items-center p-2 sm:gap-6">
       <label
         htmlFor="check"
-        className="font-bold text-zinc-600 dark:text-slate-200"
+        className="font-bold text-zinc-800 dark:text-slate-200"
       >
         {label}
       </label>

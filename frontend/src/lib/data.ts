@@ -37,7 +37,6 @@ export async function fetchCoursesPaginated(page: number, maxElements: number) {
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`);
     const data = await res.json();
-
     return data;
   } catch (err) {
     throw new Error("Failed to fetch courses data");
