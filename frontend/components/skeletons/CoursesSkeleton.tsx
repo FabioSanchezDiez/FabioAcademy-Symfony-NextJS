@@ -1,7 +1,10 @@
-export default function CoursesSkeleton() {
+type CoursesSkeletonProps = {
+  length: number;
+};
+export default function CoursesSkeleton({ length }: CoursesSkeletonProps) {
   return (
     <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6">
-      {Array.from({ length: 6 }, (_, i) => i + 1).map((c) => (
+      {Array.from({ length: length }, (_, i) => i + 1).map((c) => (
         <div
           key={c}
           className="bg-white dark:bg-slate-800 p-2 sm:p-4 sm:h-55 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none "

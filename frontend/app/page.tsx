@@ -17,7 +17,7 @@ export default function Home() {
           Nuestros cursos más populares
         </h2>
 
-        <Suspense fallback={<CoursesSkeleton />}>
+        <Suspense fallback={<CoursesSkeleton length={6} />}>
           <PopularCourses></PopularCourses>
         </Suspense>
 
