@@ -5,9 +5,10 @@ import CourseFilter from "@/components/ui/courses/CourseFilter";
 import { Suspense } from "react";
 
 export default function Courses() {
+  const options = ["Programación", "Desarrollo Web", "DevOps", "Mobile"];
   return (
     <>
-      <CourseFilter></CourseFilter>
+      <CourseFilter options={options}></CourseFilter>
 
       <Suspense fallback={<CoursesSkeleton length={12} />}>
         <FilteredCourses />

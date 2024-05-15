@@ -4,8 +4,6 @@ import { unstable_noStore } from "next/cache";
 // COURSES ENDPOINTS
 export async function fetchPopularCourses(min: number, max: number, maxResults: number) {
   try {
-    //Forced await simulation
-    //await new Promise((resolve) => setTimeout(resolve, 3000));
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/between/${min}/${max}/${maxResults}`);
     const data = await res.json();
@@ -18,8 +16,6 @@ export async function fetchPopularCourses(min: number, max: number, maxResults: 
 
 export async function fetchMostPopularCourse() {
   try {
-    //Forced await simulation
-    //await new Promise((resolve) => setTimeout(resolve, 3000));
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/popular`);
     const data = await res.json();
@@ -32,8 +28,6 @@ export async function fetchMostPopularCourse() {
 
 export async function fetchCoursesPaginated(page: number, maxElements: number) {
   try {
-    //Forced await simulation
-    //await new Promise((resolve) => setTimeout(resolve, 3000));
     unstable_noStore();
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`);
     const data = await res.json();

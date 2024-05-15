@@ -69,7 +69,7 @@ class CourseFixtures extends Fixture
                 'registered_users' => 2450,
                 'publication_date' => new \DateTime('2024-01-18'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FSwift%20Curso.png?alt=media&token=873c8b3c-2fa9-4e9c-9221-82e5060f65ac',
-                'category' => 'Programación',
+                'category' => 'Mobile',
             ],
             [
                 'name' => 'Kotlin: Desde el Principio a Desarrollador Android Profesional',
@@ -77,7 +77,7 @@ class CourseFixtures extends Fixture
                 'registered_users' => 22700,
                 'publication_date' => new \DateTime('2024-01-19'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FKotlin%20Curso.png?alt=media&token=3ca7d2c4-2cf7-41ed-97d1-fed3f50305d9',
-                'category' => 'Programación',
+                'category' => 'Mobile',
             ],
             [
                 'name' => 'HTML y CSS - Diseño Web Moderno desde Cero',
