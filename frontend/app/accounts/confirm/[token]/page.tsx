@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/ui/Button";
+import Button from "@/components/ui/elements/Button";
 import Loader from "@/components/ui/elements/Loader";
 import { confirmUser } from "@/src/lib/data";
 import { useRouter } from "next/navigation";
