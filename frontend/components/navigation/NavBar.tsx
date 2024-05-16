@@ -17,7 +17,7 @@ export default function NavBar() {
           />
         </Link>
         <NavLinks />
-        <SearchBar />
+        <SearchBar placeholder="Buscar cursos..." />
         <ThemeSwitch />
       </nav>
     </header>
