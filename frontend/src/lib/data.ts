@@ -37,6 +37,17 @@ export async function fetchCoursesPaginated(page: number, maxElements: number) {
   }
 }
 
+export async function fetchSearchedCourses(query: string, page: number, maxElements: number) {
+  try {
+    unstable_noStore();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/like/${query}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    throw new Error("Failed to fetch courses data");
+  }
+}
+
 export async function fetchCourseById(id: number) {
   try {
     //Forced await simulation

@@ -1,9 +1,15 @@
 type CoursesSkeletonProps = {
   length: number;
+  cols?: number;
 };
-export default function CoursesSkeleton({ length }: CoursesSkeletonProps) {
+export default function CoursesSkeleton({
+  length,
+  cols = 3,
+}: CoursesSkeletonProps) {
   return (
-    <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6">
+    <section
+      className={`container flex flex-col xl:grid xl:grid-cols-${cols} lg:grid lg:grid-cols-2 gap-6`}
+    >
       {Array.from({ length: length }, (_, i) => i + 1).map((c) => (
         <div
           key={c}
