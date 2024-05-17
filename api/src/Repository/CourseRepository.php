@@ -84,15 +84,23 @@ class CourseRepository extends ServiceEntityRepository
     /**
      * @return CourseDTO[] Returns an array of Course objects
      */
-    public function findLikeName(string $value): array
+    public function findLikeName(int $page, int $pageSize, string $value): array
     {
-        $courses = $this->createQueryBuilder('c')
+        $query = $this->createQueryBuilder('c')
             ->where('c.name LIKE :val')
             ->setParameter('val', "%{$value}%")
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
 
-        return $this->mapper->mapCourses($courses);
+        $pagination = $this->paginator->paginate($query, $page, $pageSize);
+        $courses = $pagination->getItems();
+        $currentPage = $pagination->getCurrentPageNumber();
+        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
+
+        return [
+            'courses' => $this->mapper->mapCourses($courses),
+            'currentPage' => $currentPage,
+            'totalPages' => intval(ceil($totalPages)),
+        ];
     }
 
     public function findMostPopularCourse(): ?Course

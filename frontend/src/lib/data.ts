@@ -1,11 +1,16 @@
 import { unstable_noStore } from "next/cache";
 
-
 // COURSES ENDPOINTS
-export async function fetchPopularCourses(min: number, max: number, maxResults: number) {
+export async function fetchPopularCourses(
+  min: number,
+  max: number,
+  maxResults: number
+) {
   try {
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/between/${min}/${max}/${maxResults}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/between/${min}/${max}/${maxResults}`
+    );
     const data = await res.json();
 
     return data;
@@ -17,7 +22,9 @@ export async function fetchPopularCourses(min: number, max: number, maxResults: 
 export async function fetchMostPopularCourse() {
   try {
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/popular`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/popular`
+    );
     const data = await res.json();
 
     return data;
@@ -29,7 +36,9 @@ export async function fetchMostPopularCourse() {
 export async function fetchCoursesPaginated(page: number, maxElements: number) {
   try {
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`
+    );
     const data = await res.json();
     return data;
   } catch (err) {
@@ -37,10 +46,16 @@ export async function fetchCoursesPaginated(page: number, maxElements: number) {
   }
 }
 
-export async function fetchSearchedCourses(query: string, page: number, maxElements: number) {
+export async function fetchSearchedCourses(
+  query: string,
+  page: number,
+  maxElements: number
+) {
   try {
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/like/${query}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/like/${query}/${page}/${maxElements}`
+    );
     const data = await res.json();
     return data;
   } catch (err) {
@@ -53,7 +68,9 @@ export async function fetchCourseById(id: number) {
     //Forced await simulation
     //await new Promise((resolve) => setTimeout(resolve, 3000));
     unstable_noStore();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/id/${id}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/id/${id}`
+    );
     const data = await res.json();
 
     return data;
@@ -62,9 +79,12 @@ export async function fetchCourseById(id: number) {
   }
 }
 
-
 // USERS ENDPOINTS
-export async function registerUser(name: string, email: string, password: string) {
+export async function registerUser(
+  name: string,
+  email: string,
+  password: string
+) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/create`,
@@ -89,7 +109,10 @@ export async function registerUser(name: string, email: string, password: string
 
 export async function confirmUser(token: string) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/confirm/${token}`, {method: "PUT", headers: {"Content-Type": "application/json"}});
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/confirm/${token}`,
+      { method: "PUT", headers: { "Content-Type": "application/json" } }
+    );
     const data = await res.json();
 
     return data;
@@ -111,7 +134,7 @@ export async function checkSessionStatus(token: string) {
       }
     );
     const data = await res.json();
-    if(data.code === 401) throw new Error("Expired JWT token")
+    if (data.code === 401) throw new Error("Expired JWT token");
   } catch (err) {
     throw new Error("Unexpected error");
   }

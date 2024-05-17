@@ -59,10 +59,10 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
-    #[Route('/courses/like/{condition}', name: 'courses_like', methods: ['GET'])]
-    public function coursesLikeName(string $condition): Response
+    #[Route('/courses/like/{condition}/{page}/{size}', name: 'courses_like', methods: ['GET'])]
+    public function coursesLikeName(string $condition, int $page, int $size): Response
     {
-        $courses = $this->courseRepository->findLikeName($condition);
+        $courses = $this->courseRepository->findLikeName($page, $size, $condition);
         $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
