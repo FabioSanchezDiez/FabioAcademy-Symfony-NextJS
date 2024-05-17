@@ -15,7 +15,7 @@ export default function PaginationArrow({
     "flex h-10 w-10 items-center justify-center rounded-md border",
     {
       "pointer-events-none text-gray-300": isDisabled,
-      "hover:bg-gray-100": !isDisabled,
+      "hover:bg-gray-100 dark:hover:bg-gray-500": !isDisabled,
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",
     }

@@ -33,7 +33,7 @@ export default async function SearchedCourses({
         )}
       </section>
 
-      <div className="mt-8">
+      <div className="mt-10 bg-white dark:bg-slate-800 rounded-lg w-fit p-4 shadow-xl">
         <Pagination totalPages={courses.totalPages} />
       </div>
     </>
