@@ -79,6 +79,22 @@ export async function fetchCourseById(id: number) {
   }
 }
 
+//SECTION ENDPOINTS
+export async function fetchSectionsByCourse(id: number) {
+  try {
+    unstable_noStore();
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/sections/course/${id}`
+    );
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to fetch courses data");
+  }
+}
+
+
 // USERS ENDPOINTS
 export async function registerUser(
   name: string,

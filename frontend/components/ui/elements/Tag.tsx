@@ -6,6 +6,8 @@ export default function Tag({
   bgColor: string;
 }) {
   return (
-    <div className={`${bgColor} p-2 rounded-md text-white`}>{children}</div>
+    <div className={`${bgColor} p-2 rounded-md text-white text-sm`}>
+      {children}
+    </div>
   );
 }
