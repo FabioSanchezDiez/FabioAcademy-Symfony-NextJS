@@ -16,6 +16,9 @@ export default function CoursePage({ course }: { course: Course }) {
           <Tag bgColor="bg-fuchsia-500">
             Fecha de publicación: {publicationDate}
           </Tag>
+          <Tag bgColor="bg-rose-500">
+            Usuarios inscritos: {course.registeredUsers}
+          </Tag>
         </div>
       </section>
       <section>
@@ -26,14 +29,10 @@ export default function CoursePage({ course }: { course: Course }) {
             width={700}
             height={700}
           ></Image>
-          <div className="flex gap-2 items-center p-4">
-            <p className="text-md">Inscritos: {course.registeredUsers}</p>
-            <UserIcon className="w-4 h-4"></UserIcon>
-          </div>
           <Button
-            textContent="Inscribirse"
+            textContent="Inscribirse al curso"
             textColor="text-white"
-            bgColor="bg-black"
+            bgColor="bg-zinc-800 dark:bg-slate-700"
           ></Button>
         </div>
       </section>
