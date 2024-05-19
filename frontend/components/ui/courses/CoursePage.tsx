@@ -14,8 +14,8 @@ export default function CoursePage({
 }) {
   const publicationDate = new Date(course.publicationDate).toLocaleDateString();
   return (
-    <main className="flex flex-col md:flex-row gap-12 mt-12">
-      <section className="p-6 w-7/10">
+    <main className="flex flex-col-reverse md:grid md:grid-cols-10 gap-12 mt-12">
+      <section className="p-6 md:col-span-7">
         <h1 className="text-4xl font-black">{course.name}</h1>
         <p className="mt-6 text-lg">{course.description}</p>
         <div className="flex flex-col md:flex-row gap-6 mt-8">
@@ -38,7 +38,7 @@ export default function CoursePage({
           )}
         </div>
       </section>
-      <section className="w-3/10">
+      <section className="md:col-span-3 p-4">
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border-slate-600">
           <Image
             src={course.image}
