@@ -17,6 +17,7 @@ class SectionRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $courseId
      * @return Section[] Returns an array of Section objects
      */
     public function findSectionsByCourse(int $courseId): array

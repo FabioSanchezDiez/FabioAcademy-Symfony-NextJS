@@ -8,7 +8,6 @@ use App\Service\AutoMapperService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
 /**
@@ -46,6 +45,12 @@ class CourseRepository extends ServiceEntityRepository
         ];
     }
 
+    /**
+     * @param int $page
+     * @param int $pageSize
+     * @param array $categories
+     * @return array Returns an array of Course objects paginated
+     */
     public function findPaginatedFilter(int $page, int $pageSize, array $categories): array{
 
         $query = $this->createQueryBuilder('c')
@@ -65,6 +70,9 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $min
+     * @param int $max
+     * @param int $maxResults
      * @return CourseDTO[] Returns an array of Course objects
      */
     public function findByRegisteredUsers(int $min, int $max, int $maxResults): array
@@ -82,6 +90,9 @@ class CourseRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param int $page
+     * @param int $pageSize
+     * @param string $value
      * @return CourseDTO[] Returns an array of Course objects
      */
     public function findLikeName(int $page, int $pageSize, string $value): array
@@ -103,7 +114,10 @@ class CourseRepository extends ServiceEntityRepository
         ];
     }
 
-    public function findMostPopularCourse(): ?Course
+    /**
+     * @return Course
+     */
+    public function findMostPopularCourse(): Course
     {
         return $this->createQueryBuilder('c')
             ->orderBy('c.registeredUsers', 'DESC')
@@ -113,6 +127,11 @@ class CourseRepository extends ServiceEntityRepository
             ;
     }
 
+    /**
+     * @param array $courseData
+     * @return Course
+     * @throws \Exception
+     */
     public function createCourse(array $courseData): Course
     {
         $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], new \DateTime($courseData["publication_date"]), $courseData["image"], $courseData["category"]);

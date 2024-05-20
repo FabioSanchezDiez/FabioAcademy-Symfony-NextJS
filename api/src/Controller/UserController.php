@@ -28,18 +28,4 @@ class UserController extends AbstractController
 
         return new JsonResponse(["success" => "Usuario confirmado correctamente"], Response::HTTP_OK);
     }
-
-    #[Route('/users/check', name: 'users_check', methods: ['POST'])]
-    public function checkValid(Request $request, UserService $userService): Response
-    {
-        $userData = json_decode($request->getContent(), true);
-        $response = $userService->checkValidPassword($userData);
-
-        return new Response($response, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
-    }
-
-    #[Route('/auth/check', name: 'auth_check', methods: ['GET'])]
-    public function checkSessionStatus(): Response{
-        return new Response(true ,Response::HTTP_OK);
-    }
 }
