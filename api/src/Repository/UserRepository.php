@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Course;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,6 +26,29 @@ class UserRepository extends ServiceEntityRepository
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param int $userId
+     * @param int $courseId
+     * @return void
+     */
+    public function addUserToCourse(int $userId, int $courseId): void
+    {
+        $entityManager = $this->getEntityManager();
+        $courseRepository = $entityManager->getRepository(Course::class);
+
+        $user = $this->find($userId);
+        $course = $courseRepository->find($courseId);
+
+        if ($user && $course) {
+            if($user->getCourses()->contains($course)){
+                throw new \Exception("Usuario ya inscrito en el curso");
+            }
+            $user->addCourse($course);
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
     }
 
     //    /**

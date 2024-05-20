@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,6 +12,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
+
+    public function __construct(private UserRepository $userRepository){}
+
     #[Route('/users/create', name: 'users_create', methods: ['POST'])]
     public function createUser(Request $request, UserService $userService): JsonResponse
     {
@@ -27,5 +31,13 @@ class UserController extends AbstractController
         if(!$success) return new JsonResponse(["error" => "Usuario no existente o token no valido"], Response::HTTP_NOT_FOUND);
 
         return new JsonResponse(["success" => "Usuario confirmado correctamente"], Response::HTTP_OK);
+    }
+
+    #[Route('/users/courses/enroll/{userId}/{courseId}', name: 'users_courses_enroll', methods: ['POST'])]
+    public function enrollUserInCourse(int $userId, int $courseId): JsonResponse
+    {
+        $this->userRepository->addUserToCourse($userId,$courseId);
+
+        return new JsonResponse(["success" => "Usuario inscrito correctamente"], Response::HTTP_OK);
     }
 }
