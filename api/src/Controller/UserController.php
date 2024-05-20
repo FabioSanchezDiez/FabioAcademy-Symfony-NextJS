@@ -12,9 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
-
-    public function __construct(private UserRepository $userRepository){}
-
     #[Route('/users/create', name: 'users_create', methods: ['POST'])]
     public function createUser(Request $request, UserService $userService): JsonResponse
     {
@@ -33,10 +30,11 @@ class UserController extends AbstractController
         return new JsonResponse(["success" => "Usuario confirmado correctamente"], Response::HTTP_OK);
     }
 
-    #[Route('/users/courses/enroll/{userId}/{courseId}', name: 'users_courses_enroll', methods: ['POST'])]
-    public function enrollUserInCourse(int $userId, int $courseId): JsonResponse
+    #[Route('/users/courses/enroll', name: 'users_courses_enroll', methods: ['POST'])]
+    public function enrollUserInCourse(Request $request, UserService $userService ): JsonResponse
     {
-        $this->userRepository->addUserToCourse($userId,$courseId);
+        $userData = json_decode($request->getContent(), true);
+        $userService->enrollUser($userData);
 
         return new JsonResponse(["success" => "Usuario inscrito correctamente"], Response::HTTP_OK);
     }

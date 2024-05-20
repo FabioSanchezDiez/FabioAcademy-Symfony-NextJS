@@ -123,6 +123,30 @@ export async function registerUser(
   }
 }
 
+export async function enrollUserInCourse(email: string, courseId: number, token: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/courses/enroll`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          email,
+          courseId
+        }),
+      }
+    );
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to enroll the user");
+  }
+}
+
 export async function confirmUser(token: string) {
   try {
     const res = await fetch(

@@ -22,34 +22,13 @@ class UserRepository extends ServiceEntityRepository
      * @param User $user
      * @return void
      */
-    public function createUser(User $user): void
+    public function createOrUpdateUser(User $user): void
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
-    /**
-     * @param int $userId
-     * @param int $courseId
-     * @return void
-     */
-    public function addUserToCourse(int $userId, int $courseId): void
-    {
-        $entityManager = $this->getEntityManager();
-        $courseRepository = $entityManager->getRepository(Course::class);
 
-        $user = $this->find($userId);
-        $course = $courseRepository->find($courseId);
-
-        if ($user && $course) {
-            if($user->getCourses()->contains($course)){
-                throw new \Exception("Usuario ya inscrito en el curso");
-            }
-            $user->addCourse($course);
-            $entityManager->persist($user);
-            $entityManager->flush();
-        }
-    }
 
     //    /**
     //     * @return User[] Returns an array of User objects

@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Entity\Course;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,7 +25,7 @@ class UserService
         $hashedPassword = $this->passwordHasher->hashPassword($user, $userData['password']);
         $user->setPassword($hashedPassword);
 
-        $this->userRepository->createUser($user);
+        $this->userRepository->createOrUpdateUser($user);
 
         $this->emailService->sendConfirmationEmail($user->getName(), $user->getEmail(), $user->getToken());
     }
@@ -37,6 +38,22 @@ class UserService
         $user->setToken(null);
         $this->entityManager->flush();
         return true;
+    }
+
+    public function enrollUser(array $userData): void
+    {
+        $courseRepository = $this->entityManager->getRepository(Course::class);
+
+        $user = $this->userRepository->findOneBy(["email" => $userData["email"]]);
+        $course = $courseRepository->find($userData["courseId"]);
+
+        if ($user && $course) {
+            if ($user->getCourses()->contains($course)) {
+                throw new \Exception("Usuario ya inscrito en el curso");
+            }
+            $user->addCourse($course);
+            $this->userRepository->createOrUpdateUser($user);
+        }
     }
 
     public function checkValidPassword(array $userData): bool
