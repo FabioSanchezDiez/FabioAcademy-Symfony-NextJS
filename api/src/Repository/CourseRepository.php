@@ -140,4 +140,15 @@ class CourseRepository extends ServiceEntityRepository
 
         return $course;
     }
+
+    public function findCoursesByUser(string $email): array
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.users', 'u')
+            ->addSelect('u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getResult();
+    }
 }
