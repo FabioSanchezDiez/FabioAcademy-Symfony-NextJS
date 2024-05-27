@@ -18,15 +18,23 @@ export default function Page({
             Por favor, indique lo que quiere encontrar
           </p>
         ) : (
-          <Suspense
-            key={query + currentPage}
-            fallback={<CoursesSkeleton length={12} cols={2}></CoursesSkeleton>}
-          >
-            <SearchedCourses
-              query={query}
-              currentPage={currentPage}
-            ></SearchedCourses>
-          </Suspense>
+          <>
+            <h1 className="text-2xl font-bold mb-8">
+              Resultados para{" "}
+              <span className="text-darkenLightBlue">&#34;{query}&#34;</span>
+            </h1>
+            <Suspense
+              key={query + currentPage}
+              fallback={
+                <CoursesSkeleton length={12} cols={2}></CoursesSkeleton>
+              }
+            >
+              <SearchedCourses
+                query={query}
+                currentPage={currentPage}
+              ></SearchedCourses>
+            </Suspense>
+          </>
         )}
       </div>
     </>

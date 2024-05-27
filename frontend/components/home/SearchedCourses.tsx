@@ -27,9 +27,7 @@ export default async function SearchedCourses({
             />
           ))
         ) : (
-          <p className="text-center">
-            No se han encontrado cursos para &quot;{query}&quot;
-          </p>
+          <p>No se han encontrado cursos para &quot;{query}&quot;</p>
         )}
       </section>
 
