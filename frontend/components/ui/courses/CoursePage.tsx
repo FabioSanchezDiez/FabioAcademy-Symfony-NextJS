@@ -10,6 +10,7 @@ import { enrollUserInCourse } from "@/src/lib/data";
 import { useState } from "react";
 import Loader from "../elements/Loader";
 import Swal from "sweetalert2";
+import { Toast } from "@/src/lib/utils";
 
 export default function CoursePage({
   course,
@@ -24,21 +25,10 @@ export default function CoursePage({
 
   const publicationDate = new Date(course.publicationDate).toLocaleDateString();
 
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "top-end",
-    showConfirmButton: false,
-    timer: 2000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
-
   const handleOnClick = async () => {
     if (!session?.user) {
       router.push("/accounts/login");
+      return;
     }
     setIsLoading(true);
     const response = await enrollUserInCourse(

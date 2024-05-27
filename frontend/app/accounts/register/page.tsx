@@ -2,10 +2,9 @@
 
 import Form from "@/components/auth/Form";
 import { registerUser } from "@/src/lib/data";
-import { signIn } from "next-auth/react";
+import { Toast } from "@/src/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Swal from "sweetalert2";
 
 export default function Page() {
   const [errors, setErrors] = useState<string[]>([]);
@@ -29,17 +28,6 @@ export default function Page() {
     }
     setIsLoading(false);
 
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 5000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    });
     Toast.fire({
       icon: "success",
       title: "Registrado con éxito",

@@ -2,9 +2,9 @@
 import Button from "@/components/ui/elements/Button";
 import Loader from "@/components/ui/elements/Loader";
 import { confirmUser } from "@/src/lib/data";
+import { Toast } from "@/src/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Swal from "sweetalert2";
 
 export default function Page({ params }: { params: { token: string } }) {
   const [errors, setErrors] = useState<string[]>([]);
@@ -22,17 +22,6 @@ export default function Page({ params }: { params: { token: string } }) {
     }
     setIsLoading(false);
 
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.onmouseenter = Swal.stopTimer;
-        toast.onmouseleave = Swal.resumeTimer;
-      },
-    });
     Toast.fire({
       icon: "success",
       title: "Cuenta confirmada",
