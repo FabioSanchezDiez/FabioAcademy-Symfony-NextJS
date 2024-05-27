@@ -11,6 +11,7 @@ export default function Page() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isTeacher, setIsTeacher] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
@@ -19,7 +20,7 @@ export default function Page() {
     setIsLoading(true);
     setErrors([]);
 
-    const res = await registerUser(name, email, password);
+    const res = await registerUser(name, email, password, isTeacher);
 
     if (res.error) {
       setErrors(["Este correo ya esta registrado"]);
@@ -51,6 +52,7 @@ export default function Page() {
         setName={setName}
         setEmail={setEmail}
         setPassword={setPassword}
+        setIsTeacher={setIsTeacher}
         handleSubmit={handleSubmit}
       ></Form>
     </>

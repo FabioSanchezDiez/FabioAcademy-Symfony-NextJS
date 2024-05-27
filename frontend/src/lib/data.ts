@@ -94,12 +94,12 @@ export async function fetchSectionsByCourse(id: number) {
   }
 }
 
-
 // USERS ENDPOINTS
 export async function registerUser(
   name: string,
   email: string,
-  password: string
+  password: string,
+  isTeacher: boolean
 ) {
   try {
     const res = await fetch(
@@ -113,6 +113,7 @@ export async function registerUser(
           name,
           email,
           password,
+          isTeacher,
         }),
       }
     );
@@ -123,7 +124,11 @@ export async function registerUser(
   }
 }
 
-export async function enrollUserInCourse(email: string, courseId: number, token: string) {
+export async function enrollUserInCourse(
+  email: string,
+  courseId: number,
+  token: string
+) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/courses/enroll`,
@@ -135,7 +140,7 @@ export async function enrollUserInCourse(email: string, courseId: number, token:
         },
         body: JSON.stringify({
           email,
-          courseId
+          courseId,
         }),
       }
     );

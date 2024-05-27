@@ -19,7 +19,7 @@ class UserService
         $user->setEmail($userData['email']);
         $user->setAdmin(false);
         $user->setConfirmed(false);
-        $user->setRoles(["ROLE_USER"]);
+        $user->setRoles($userData["isTeacher"] === true ? ["ROLE_USER", "ROLE_TEACHER"] : ["ROLE_USER"]);
         $user->setToken($this->generateConfirmationToken());
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $userData['password']);
