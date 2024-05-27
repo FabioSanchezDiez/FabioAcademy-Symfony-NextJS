@@ -5,6 +5,5 @@ import CoursePage from "../ui/courses/CoursePage";
 export default async function FullCourse({ id }: { id: number }) {
   const course: Course = await fetchCourseById(id);
   const sections: Section[] = await fetchSectionsByCourse(id);
-  console.log(sections);
   return <CoursePage course={course} sections={sections}></CoursePage>;
 }

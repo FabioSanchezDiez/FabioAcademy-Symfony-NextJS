@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { enrollUserInCourse } from "@/src/lib/data";
 import { useState } from "react";
 import Loader from "../elements/Loader";
-import Swal from "sweetalert2";
 import { Toast } from "@/src/lib/utils";
 
 export default function CoursePage({
