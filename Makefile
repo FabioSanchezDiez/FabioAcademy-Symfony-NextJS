@@ -1,5 +1,5 @@
 .PHONY: init
-init: build up-d install-dependencies tests ## Runs everything needed to get the project ready from scratch
+init: build up-d install-dependencies ## Runs everything needed to get the project ready from scratch
 
 .PHONY: build
 build: ## Build the containers
