@@ -16,6 +16,8 @@ services:
       - ./api/:/var/www/html
     environment:
       - APP_ENV=dev
+    extra_hosts:
+      - host.docker.internal:host-gateway
     container_name: fabio_code_academy_api
 
   database:
