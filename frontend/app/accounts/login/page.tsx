@@ -36,7 +36,7 @@ export default function Page() {
     });
 
     setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/dashboard/learning");
     }, 2000);
   };
 

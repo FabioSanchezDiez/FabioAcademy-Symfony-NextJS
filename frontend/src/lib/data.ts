@@ -162,7 +162,6 @@ export async function confirmUser(token: string) {
 
     return data;
   } catch (err) {
-    console.log(err)
     throw new Error("Failed to confirm the user");
   }
 }
@@ -170,7 +169,7 @@ export async function confirmUser(token: string) {
 export async function checkSessionStatus(token: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/check`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/auth/check`,
       {
         method: "GET",
         headers: {

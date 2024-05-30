@@ -38,4 +38,9 @@ class UserController extends AbstractController
 
         return new JsonResponse(["success" => "Usuario inscrito correctamente"], Response::HTTP_OK);
     }
+
+    #[Route('/auth/check', name: 'auth_check', methods: ['GET'])]
+    public function checkSessionStatus(): Response{
+        return new Response(true ,Response::HTTP_OK);
+    }
 }

@@ -34,13 +34,20 @@ export default function NavLinks() {
       </Link>
       {session?.user ? (
         <>
-          <Link href={"/dashboard"}>
-            <p className="dark:text-slate-400 dark:hover:text-slate-200 hover:text-gray-700">
-              Dashboard
+          <Link href={"/dashboard/learning"}>
+            <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap dark:hover:text-slate-200 hover:text-gray-700">
+              Mis Cursos
             </p>
           </Link>
+          {session.user.isTeacher && (
+            <Link href={"/dashboard/teachers"}>
+              <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap dark:hover:text-slate-200 hover:text-gray-700">
+                Gestionar Cursos
+              </p>
+            </Link>
+          )}
           <button onClick={() => signOut()}>
-            <p className="dark:text-slate-400 dark:hover:text-slate-200 hover:text-gray-700">
+            <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap dark:hover:text-slate-200 hover:text-gray-700">
               Cerrar Sesión
             </p>
           </button>
