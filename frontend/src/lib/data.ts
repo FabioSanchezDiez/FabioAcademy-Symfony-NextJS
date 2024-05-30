@@ -103,7 +103,7 @@ export async function registerUser(
 ) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/create`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/create`,
       {
         method: "POST",
         headers: {
@@ -131,7 +131,7 @@ export async function enrollUserInCourse(
 ) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/courses/enroll`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/courses/enroll`,
       {
         method: "POST",
         headers: {
@@ -155,13 +155,14 @@ export async function enrollUserInCourse(
 export async function confirmUser(token: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/confirm/${token}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/confirm/${token}`,
       { method: "PUT", headers: { "Content-Type": "application/json" } }
     );
     const data = await res.json();
 
     return data;
   } catch (err) {
+    console.log(err)
     throw new Error("Failed to confirm the user");
   }
 }

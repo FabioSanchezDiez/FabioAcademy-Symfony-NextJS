@@ -33,7 +33,7 @@ class UserFixtures extends Fixture
             [
                 'name' => 'Fabio',
                 'email' => 'fabiocode@gmail.com',
-                'password' => '$2a$10$VkQsctMldlG9LJW6vV68pezIfMQd0Mu91.Kb.IaIHMkU653sgDSsm',
+                'password' => '$2y$13$JKAHm8CB0DjWgMpm2wXgoeEPiKvbumY6cTLKMpZcCf6uGI1Tz8or6',
                 'isAdmin' => false,
                 'isConfirmed' => true,
                 'roles' => ["ROLE_USER"]
@@ -41,7 +41,7 @@ class UserFixtures extends Fixture
             [
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
-                'password' => '$2a$10$MnL34SeVKYvvE5SSvtM7wuTODgg4uzyGOfjrl0Ln4XLZE7o7w1cbm',
+                'password' => '$2y$13$JKAHm8CB0DjWgMpm2wXgoeEPiKvbumY6cTLKMpZcCf6uGI1Tz8or6',
                 'isAdmin' => true,
                 'isConfirmed' => false,
                 'roles' => ["ROLE_USER", "ROLE_ADMIN"]

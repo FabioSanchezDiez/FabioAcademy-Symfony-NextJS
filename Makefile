@@ -27,6 +27,7 @@ db: ##Create the initial db
 .PHONY: install-dependencies
 install-dependencies: ##Install composer dependencies
 	sudo docker exec -it fabio_code_academy_api composer install
+	sudo docker exec -it fabio_code_academy_api php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
 .PHONY: tests
 tests: ##Run all unit tests
