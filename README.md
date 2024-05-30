@@ -43,7 +43,7 @@
 
 ## About The Project
 
-FabioCode Academy 
+FabioCode Academy features a robust API built with Symfony and a frontend developed using Next.js. Each component operates as an independent black box, ensuring seamless integration and modularity. 
 
 ### Built With
 
@@ -57,6 +57,47 @@ FabioCode Academy
 * [![Tailwind][Tailwind.com]][Tailwind-url]
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Getting Started
+
+The entire project works inside Docker containers so you have to install Docker and Docker Compose 🐳 on your device.
+It also has a Makefile to automatize the execution and the building of the project.
+
+(Note: everything was built using Ubuntu OS, this means that it might not work properly on a Windows OS)
+
+[![Ubuntu][Ubuntu]][Ubuntu-url]
+
+### Installation
+
+1. Clone the repository:
+
+   ```sh
+   git clone git@github.com:FabioSanchezDiez/FabioAcademy-Symfony-NextJS.git
+   ```
+
+2. Initialize all the docker containers and install the dependencies:
+
+   ```sh
+   make init
+   ```
+
+3. Create the database and load the fixtures:
+
+   ```sh
+   make db
+   ```
+
+Now you should be able to access http://localhost:3000/
+
+### For future initilizations
+Once you already set up the project for the next time that you want to run it execute that:
+
+1. Run all the containers:
+
+   ```sh
+   make up
+   ```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -75,6 +116,8 @@ FabioCode Academy
 [MySQL-url]: https://www.mysql.com/
 [Tailwind.com]: https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white
 [Tailwind-url]: https://tailwindcss.com/
+[Ubuntu]: https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white
+[Ubuntu-url]: https://ubuntu.com/download
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [built-with-love]: http://ForTheBadge.com/images/badges/built-with-love.svg
