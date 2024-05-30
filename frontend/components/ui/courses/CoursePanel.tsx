@@ -17,7 +17,7 @@ export default function CoursePanel({
 
   return (
     <>
-      <Link href={`/courses/${id}`}>
+      <Link href={`/courses/${id}`} prefetch={true}>
         <article className="p-6 flex flex-col lg:flex-row gap-8 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700">
           <div className="grid place-items-center">
             <Image

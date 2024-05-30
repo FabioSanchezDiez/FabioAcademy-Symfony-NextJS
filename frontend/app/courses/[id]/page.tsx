@@ -1,10 +1,10 @@
 import FullCourse from "@/components/home/FullCourse";
-import CoursePanelSkeleton from "@/components/skeletons/CoursePanelSkeleton";
+import CoursePageSkeleton from "@/components/skeletons/CoursePageSkeleton";
 import { Suspense } from "react";
 
 export default function Page({ params }: { params: { id: number } }) {
   return (
-    <Suspense fallback={<CoursePanelSkeleton></CoursePanelSkeleton>}>
+    <Suspense fallback={<CoursePageSkeleton></CoursePageSkeleton>}>
       <FullCourse id={params.id}></FullCourse>
     </Suspense>
   );
