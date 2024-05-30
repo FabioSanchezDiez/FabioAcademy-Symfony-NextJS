@@ -7,6 +7,7 @@ services:
       - ./api/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - php
+    container_name: fabio_code_academy_nginx
 
   php:
     build:
@@ -15,7 +16,7 @@ services:
       - ./api/:/var/www/html
     environment:
       - APP_ENV=dev
-    container_name: api_php
+    container_name: fabio_code_academy_api
 
   database:
     image: mysql:8.0
@@ -26,3 +27,16 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: fabio_code_academy
+    container_name: fabio_code_academy_mysql
+  
+  frontend:
+    build:
+      context: frontend/
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    container_name: fabio_code_academy_frontend

@@ -19,15 +19,15 @@ stop: ## Stop the containers
 
 .PHONY: db
 db: ##Create the initial db
-	sudo docker exec -it api_php php bin/console doctrine:database:drop -n --if-exists --force
-	sudo docker exec -it api_php php bin/console doctrine:database:create -n --if-not-exists
-	sudo docker exec -it api_php php bin/console doctrine:migrations:migrate -n
-	sudo docker exec -it api_php php bin/console doctrine:fixtures:load -n
+	sudo docker exec -it fabio_code_academy_api php bin/console doctrine:database:drop -n --if-exists --force
+	sudo docker exec -it fabio_code_academy_api php bin/console doctrine:database:create -n --if-not-exists
+	sudo docker exec -it fabio_code_academy_api php bin/console doctrine:migrations:migrate -n
+	sudo docker exec -it fabio_code_academy_api php bin/console doctrine:fixtures:load -n
 
 .PHONY: install-dependencies
 install-dependencies: ##Install composer dependencies
-	sudo docker exec -it api_php composer install
+	sudo docker exec -it fabio_code_academy_api composer install
 
 .PHONY: tests
 tests: ##Run all unit tests
-	sudo docker exec -it api_php php bin/phpunit tests/
+	sudo docker exec -it fabio_code_academy_api php bin/phpunit tests/
