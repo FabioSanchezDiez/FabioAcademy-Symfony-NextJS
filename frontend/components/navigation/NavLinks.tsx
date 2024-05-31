@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 export default function NavLinks() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const checkSessionIntervalMS = 300000;
 
   useEffect(() => {
@@ -32,7 +32,11 @@ export default function NavLinks() {
           Cursos
         </p>
       </Link>
-      {session?.user ? (
+      {status === "loading" ? (
+        <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap dark:hover:text-slate-200 hover:text-gray-700">
+          Cargando...
+        </p>
+      ) : session?.user ? (
         <>
           <Link href={"/dashboard/learning"}>
             <p className="dark:text-slate-400 inline-block min-w-fit whitespace-nowrap dark:hover:text-slate-200 hover:text-gray-700">
