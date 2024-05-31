@@ -129,7 +129,7 @@ export async function registerUser(
 ) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/create`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_CLIENT}/users/create`,
       {
         method: "POST",
         headers: {

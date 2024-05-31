@@ -3,10 +3,12 @@
 namespace App\DataFixtures;
 
 use App\Entity\Course;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class CourseFixtures extends Fixture
+class CourseFixtures extends Fixture implements DependentFixtureInterface
 {
     private array $coursesData;
     public function load(ObjectManager $manager): void
@@ -14,7 +16,8 @@ class CourseFixtures extends Fixture
         $this->initializeCoursesData();
 
         foreach ($this->coursesData as $courseInfo) {
-            $course = new Course($courseInfo['name'], $courseInfo['description'], $courseInfo['registered_users'], $courseInfo['publication_date'], $courseInfo['image'], $courseInfo['category']);
+            $user = $manager->getReference(User::class, $courseInfo['owner_id']);
+            $course = new Course($courseInfo['name'], $courseInfo['description'], $courseInfo['registered_users'], $courseInfo['publication_date'], $courseInfo['image'], $courseInfo['category'], $user);
             $manager->persist($course);
         }
 
@@ -30,6 +33,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-13'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FPyhton%20Curso.png?alt=media&token=2128f45d-22d9-45da-8db8-9f01e850e08c',
                 'category' => 'Programación',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Desarrollo Web con JavaScript - Construye tu Sitio desde Cero',
@@ -38,6 +42,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-14'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FJavaScript%20Curso.png?alt=media&token=21e81e2f-b36f-498c-bdb8-4193b49b12f8',
                 'category' => 'Programación',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Dominando Java - Curso Completo Desde 0 para Estudiantes',
@@ -46,6 +51,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-15'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FJava%20Curso.png?alt=media&token=ebf6d868-f1c8-49c5-9fce-7e8edf964ffd',
                 'category' => 'Programación',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'C# en Acción - Aprende Programación Orientada a Objetos',
@@ -54,6 +60,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-16'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FC%23%20Curso.png?alt=media&token=03b112f5-5284-4d86-8481-d3699effb83c',
                 'category' => 'Programación',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Ruby para Todos - Desde Novato hasta Rubyista',
@@ -62,6 +69,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-17'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FRuby%20Curso.png?alt=media&token=2ef014b8-ac00-4515-bf26-d5b6d1687942',
                 'category' => 'Programación',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Desarrollo iOS con Swift - Construye Apps para iPhone',
@@ -70,6 +78,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-18'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FSwift%20Curso.png?alt=media&token=873c8b3c-2fa9-4e9c-9221-82e5060f65ac',
                 'category' => 'Mobile',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Kotlin: Desde el Principio a Desarrollador Android Profesional',
@@ -78,6 +87,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-19'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FKotlin%20Curso.png?alt=media&token=3ca7d2c4-2cf7-41ed-97d1-fed3f50305d9',
                 'category' => 'Mobile',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'HTML y CSS - Diseño Web Moderno desde Cero',
@@ -86,6 +96,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-20'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FHTML%20y%20CSS%20Curso.png?alt=media&token=db4aa7fa-de7f-45fb-ac70-9a377e58fb84',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'ReactJS Avanzado - Construyendo Interfaces Interactivas',
@@ -94,6 +105,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-21'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FReact%20Curso.png?alt=media&token=7fcb9fe2-0465-4a05-ab44-2612607742fb',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Angular: Desarrollo de Aplicaciones Web Potentes',
@@ -102,6 +114,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-22'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FAngular%20Curso.png?alt=media&token=c79d35d3-0009-4cac-b726-e78b217cd87f',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Vue.js desde Cero - Construye Aplicaciones Modernas',
@@ -110,6 +123,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-23'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Node.js: Construyendo Aplicaciones Escalables',
@@ -118,6 +132,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-24'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Django en Profundidad - Desarrollo Rápido de Aplicaciones Web',
@@ -126,6 +141,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-25'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Laravel Framework: Desarrollo de Aplicaciones Web con PHP Modernas',
@@ -134,6 +150,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-26'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FLaravel%20Curso.png?alt=media&token=5b7e1bff-440c-4009-afaa-a90c7eed4425',
                 'category' => 'Desarrollo Web',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'MongoDB: Diseño de Bases de Datos NoSQL',
@@ -142,6 +159,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-27'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Bases de Datos',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'MySQL desde Cero - Fundamentos de Bases de Datos Relacionales',
@@ -150,6 +168,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-28'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Bases de Datos',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'PostgreSQL: Administración y Desarrollo Avanzado',
@@ -158,6 +177,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-29'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Bases de Datos',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Firebase en Acción - Desarrollo de Aplicaciones en la Nube',
@@ -166,6 +186,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-30'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Bases de Datos',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Docker: Despliegue y Contenerización de Aplicaciones',
@@ -174,6 +195,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-01-31'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'DevOps',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'CI/CD con Jenkins - Automatización de Despliegues',
@@ -182,6 +204,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-02-01'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'DevOps',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Git y GitHub: Control de Versiones para Desarrolladores',
@@ -190,6 +213,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-02-02'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'DevOps',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Fundamentos de Linux - Dominando la Terminal',
@@ -198,6 +222,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-02-03'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'DevOps',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Introducción a la Seguridad Informática',
@@ -206,6 +231,7 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-02-04'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Seguridad Informática',
+                'owner_id' => 1,
             ],
             [
                 'name' => 'Python para Ciencia de Datos - Análisis y Visualización',
@@ -214,7 +240,13 @@ class CourseFixtures extends Fixture
                 'publication_date' => new \DateTime('2024-02-05'),
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FCurso%20Generico.png?alt=media&token=10ce507b-536c-49ff-b92d-545544f0bf2a',
                 'category' => 'Ciencia de Datos',
+                'owner_id' => 1,
             ],
         ];
+    }
+
+    public function getDependencies()
+    {
+        return [UserFixtures::class];
     }
 }

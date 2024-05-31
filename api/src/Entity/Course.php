@@ -57,6 +57,11 @@ class Course
     #[Ignore]
     private Collection $reviews;
 
+    #[ORM\ManyToOne(inversedBy: 'ownedCourses')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Ignore]
+    private ?User $owner = null;
+
     /**
      * @param string|null $name
      * @param string|null $description
@@ -65,7 +70,7 @@ class Course
      * @param string|null $image
      * @param string|null $category
      */
-    public function __construct(?string $name, ?string $description, ?int $registeredUsers, ?\DateTimeInterface $publicationDate, ?string $image, ?string $category)
+    public function __construct(?string $name, ?string $description, ?int $registeredUsers, ?\DateTimeInterface $publicationDate, ?string $image, ?string $category, User $owner)
     {
         $this->name = $name;
         $this->description = $description;
@@ -76,6 +81,7 @@ class Course
         $this->sections = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->owner = $owner;
     }
 
     public function getId(): ?int
@@ -238,6 +244,18 @@ class Course
                 $review->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): static
+    {
+        $this->owner = $owner;
 
         return $this;
     }
