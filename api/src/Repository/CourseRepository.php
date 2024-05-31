@@ -141,14 +141,25 @@ class CourseRepository extends ServiceEntityRepository
         return $course;
     }
 
-    public function findCoursesByUser(string $email): array
+    public function findCoursesByUser(int $page, int $pageSize,string $email): array
     {
-        return $this->createQueryBuilder('c')
+        $query = $this->createQueryBuilder('c')
             ->innerJoin('c.users', 'u')
             ->addSelect('u')
             ->where('u.email = :email')
             ->setParameter('email', $email)
             ->getQuery()
             ->getResult();
+
+        $pagination = $this->paginator->paginate($query, $page, $pageSize);
+        $courses = $pagination->getItems();
+        $currentPage = $pagination->getCurrentPageNumber();
+        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
+
+        return [
+            'courses' => $this->mapper->mapCourses($courses),
+            'currentPage' => $currentPage,
+            'totalPages' => intval(ceil($totalPages)),
+        ];
     }
 }

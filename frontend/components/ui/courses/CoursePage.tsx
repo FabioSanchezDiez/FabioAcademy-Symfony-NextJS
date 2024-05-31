@@ -51,7 +51,7 @@ export default function CoursePage({
     });
 
     setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/dashboard/learning");
     }, 2000);
   };
   return (

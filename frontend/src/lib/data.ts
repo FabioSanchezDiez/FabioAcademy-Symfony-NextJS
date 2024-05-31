@@ -94,6 +94,32 @@ export async function fetchSectionsByCourse(id: number) {
   }
 }
 
+// PROTECTED ENDPOINTS
+export async function fetchCoursesByUser(
+  email: string,
+  token: string,
+  page: number,
+  size: number
+) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/users/${email}/${page}/${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (data.code === 401) throw new Error("Expired JWT token");
+    return data;
+  } catch (err) {
+    throw new Error();
+  }
+}
+
 // USERS ENDPOINTS
 export async function registerUser(
   name: string,
@@ -103,7 +129,7 @@ export async function registerUser(
 ) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/create`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/create`,
       {
         method: "POST",
         headers: {
@@ -131,7 +157,7 @@ export async function enrollUserInCourse(
 ) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/courses/enroll`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_CLIENT}/users/courses/enroll`,
       {
         method: "POST",
         headers: {
@@ -155,7 +181,7 @@ export async function enrollUserInCourse(
 export async function confirmUser(token: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/users/confirm/${token}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_CLIENT}/users/confirm/${token}`,
       { method: "PUT", headers: { "Content-Type": "application/json" } }
     );
     const data = await res.json();
@@ -169,7 +195,7 @@ export async function confirmUser(token: string) {
 export async function checkSessionStatus(token: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL_NO_GET}/auth/check`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_CLIENT}/auth/check`,
       {
         method: "GET",
         headers: {
