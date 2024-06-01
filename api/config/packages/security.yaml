@@ -43,6 +43,7 @@ security:
         - { path: /users/courses/enroll, roles: IS_AUTHENTICATED_FULLY }
         - { path: /courses/create, roles: IS_AUTHENTICATED_FULLY }
         - { path: /courses/delete, roles: IS_AUTHENTICATED_FULLY }
+        - { path: /courses/users/ , roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:
