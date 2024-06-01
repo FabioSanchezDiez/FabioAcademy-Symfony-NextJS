@@ -20,7 +20,7 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CourseRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator, private AutoMapperService $mapper, private EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator, private AutoMapperService $mapper, private EntityManagerInterface $entityManager, private UserRepository $userRepository)
     {
         parent::__construct($registry, Course::class);
     }
@@ -134,7 +134,8 @@ class CourseRepository extends ServiceEntityRepository
      */
     public function createCourse(array $courseData): Course
     {
-        $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], new \DateTime($courseData["publication_date"]), $courseData["image"], $courseData["category"]);
+        $user = $this->userRepository->findOneBy(["email" => $courseData["owner_email"]]);
+        $course = new Course($courseData["name"], $courseData["description"], $courseData["registered_users"], new \DateTime($courseData["publication_date"]), $courseData["image"], $courseData["category"], $user);
         $this->entityManager->persist($course);
         $this->entityManager->flush();
 
