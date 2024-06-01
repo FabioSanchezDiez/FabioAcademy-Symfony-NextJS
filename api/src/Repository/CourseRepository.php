@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\DTO\CourseDTO;
 use App\Entity\Course;
 use App\Service\AutoMapperService;
+use App\Service\CourseService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,7 +21,7 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CourseRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private PaginatorInterface $paginator, private AutoMapperService $mapper, private EntityManagerInterface $entityManager, private UserRepository $userRepository)
+    public function __construct(ManagerRegistry $registry, private AutoMapperService $mapper, private EntityManagerInterface $entityManager, private UserRepository $userRepository, private CourseService $courseService)
     {
         parent::__construct($registry, Course::class);
     }
@@ -33,16 +34,7 @@ class CourseRepository extends ServiceEntityRepository
     public function findAllPaginated(int $page, int $pageSize): array
     {
         $query = $this->createQueryBuilder('c')->getQuery();
-        $pagination = $this->paginator->paginate($query, $page, $pageSize);
-        $courses = $pagination->getItems();
-        $currentPage = $pagination->getCurrentPageNumber();
-        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
-
-        return [
-            'courses' => $courses,
-            'currentPage' => $currentPage,
-            'totalPages' => intval(ceil($totalPages)),
-        ];
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
     }
 
     /**
@@ -57,16 +49,7 @@ class CourseRepository extends ServiceEntityRepository
             ->where('c.category IN (:categories)')
             ->setParameter('categories', $categories)
             ->getQuery();
-        $pagination = $this->paginator->paginate($query, $page, $pageSize);
-        $courses = $pagination->getItems();
-        $currentPage = $pagination->getCurrentPageNumber();
-        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
-
-        return [
-            'courses' => $courses,
-            'currentPage' => $currentPage,
-            'totalPages' => intval(ceil($totalPages)),
-        ];
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
     }
 
     /**
@@ -102,16 +85,7 @@ class CourseRepository extends ServiceEntityRepository
             ->setParameter('val', "%{$value}%")
             ->getQuery();
 
-        $pagination = $this->paginator->paginate($query, $page, $pageSize);
-        $courses = $pagination->getItems();
-        $currentPage = $pagination->getCurrentPageNumber();
-        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
-
-        return [
-            'courses' => $this->mapper->mapCourses($courses),
-            'currentPage' => $currentPage,
-            'totalPages' => intval(ceil($totalPages)),
-        ];
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
     }
 
     /**
@@ -142,25 +116,15 @@ class CourseRepository extends ServiceEntityRepository
         return $course;
     }
 
-    public function findCoursesByUser(int $page, int $pageSize,string $email): array
+    public function findCoursesByUser(int $page, int $pageSize, string $email): array
     {
         $query = $this->createQueryBuilder('c')
             ->innerJoin('c.users', 'u')
             ->addSelect('u')
             ->where('u.email = :email')
             ->setParameter('email', $email)
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
 
-        $pagination = $this->paginator->paginate($query, $page, $pageSize);
-        $courses = $pagination->getItems();
-        $currentPage = $pagination->getCurrentPageNumber();
-        $totalPages = $pagination->getTotalItemCount() / $pagination->getItemNumberPerPage();
-
-        return [
-            'courses' => $this->mapper->mapCourses($courses),
-            'currentPage' => $currentPage,
-            'totalPages' => intval(ceil($totalPages)),
-        ];
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
     }
 }
