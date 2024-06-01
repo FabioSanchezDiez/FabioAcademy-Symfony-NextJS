@@ -110,7 +110,7 @@ class LessonFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [CourseFixtures::class, SectionFixtures::class];
     }

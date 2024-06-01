@@ -36,15 +36,23 @@ class UserFixtures extends Fixture
                 'password' => '$2y$13$JKAHm8CB0DjWgMpm2wXgoeEPiKvbumY6cTLKMpZcCf6uGI1Tz8or6',
                 'isAdmin' => false,
                 'isConfirmed' => true,
-                'roles' => ["ROLE_USER"]
+                'roles' => ["ROLE_USER", "ROLE_TEACHER"]
             ],
             [
                 'name' => 'Admin User',
                 'email' => 'admin@example.com',
                 'password' => '$2y$13$JKAHm8CB0DjWgMpm2wXgoeEPiKvbumY6cTLKMpZcCf6uGI1Tz8or6',
                 'isAdmin' => true,
-                'isConfirmed' => false,
+                'isConfirmed' => true,
                 'roles' => ["ROLE_USER", "ROLE_ADMIN"]
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@example.com',
+                'password' => '$2y$13$JKAHm8CB0DjWgMpm2wXgoeEPiKvbumY6cTLKMpZcCf6uGI1Tz8or6',
+                'isAdmin' => false,
+                'isConfirmed' => true,
+                'roles' => ["ROLE_USER"]
             ]
         ];
     }
