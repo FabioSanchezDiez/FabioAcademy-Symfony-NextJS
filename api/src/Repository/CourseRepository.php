@@ -116,6 +116,22 @@ class CourseRepository extends ServiceEntityRepository
         return $course;
     }
 
+    /**
+     * @param int $courseId
+     * @throws \Exception
+     */
+    public function deleteCourseById(int $courseId): void
+    {
+        $course = $this->find($courseId);
+
+        if (!$course) {
+            throw new \Exception("Course not found");
+        }
+
+        $this->entityManager->remove($course);
+        $this->entityManager->flush();
+    }
+
     public function findCoursesByUser(int $page, int $pageSize, string $email): array
     {
         $query = $this->createQueryBuilder('c')

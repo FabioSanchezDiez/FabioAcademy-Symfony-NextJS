@@ -39,7 +39,7 @@ class Course
     /**
      * @var Collection<int, Section>
      */
-    #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'course', fetch: 'LAZY')]
+    #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'course', fetch: 'LAZY', orphanRemoval: true)]
     #[Ignore]
     private Collection $sections;
 
@@ -69,6 +69,7 @@ class Course
      * @param \DateTimeInterface|null $publicationDate
      * @param string|null $image
      * @param string|null $category
+     * @param User $owner
      */
     public function __construct(?string $name, ?string $description, ?int $registeredUsers, ?\DateTimeInterface $publicationDate, ?string $image, ?string $category, User $owner)
     {

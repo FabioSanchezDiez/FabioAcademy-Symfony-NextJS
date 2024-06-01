@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CourseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -94,5 +95,12 @@ class CourseController extends AbstractController
         $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
 
         return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
+    }
+
+    #[Route('/courses/delete/{id}', name: 'courses_delete', methods: ['DELETE'])]
+    public function deleteCourse(int $id): Response
+    {
+        $this->courseRepository->deleteCourseById($id);
+        return new JsonResponse(["success" => "Curso eliminado"], Response::HTTP_OK);
     }
 }
