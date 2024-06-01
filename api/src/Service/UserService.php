@@ -25,9 +25,11 @@ class UserService
         $hashedPassword = $this->passwordHasher->hashPassword($user, $userData['password']);
         $user->setPassword($hashedPassword);
 
-        $this->userRepository->createOrUpdateUser($user);
+        $success = $this->userRepository->createOrUpdateUser($user);
 
-        $this->emailService->sendConfirmationEmail($user->getName(), $user->getEmail(), $user->getToken());
+        if($success){
+            $this->emailService->sendConfirmationEmail($user->getName(), $user->getEmail(), $user->getToken());
+        }
     }
 
     public function confirmUser(string $token): bool

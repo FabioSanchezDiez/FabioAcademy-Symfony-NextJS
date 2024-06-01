@@ -22,10 +22,11 @@ class UserRepository extends ServiceEntityRepository
      * @param User $user
      * @return void
      */
-    public function createOrUpdateUser(User $user): void
+    public function createOrUpdateUser(User $user): bool
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+        return true;
     }
 
 

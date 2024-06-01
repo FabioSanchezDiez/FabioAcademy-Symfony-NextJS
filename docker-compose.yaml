@@ -30,7 +30,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: fabio_code_academy
     container_name: fabio_code_academy_mysql
-  
+
   frontend:
     build:
       context: frontend/
@@ -42,3 +42,10 @@ services:
     environment:
       - NODE_ENV=development
     container_name: fabio_code_academy_frontend
+
+  smtp:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    container_name: fabio_code_academy_smtp
