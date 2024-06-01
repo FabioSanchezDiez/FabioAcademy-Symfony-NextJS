@@ -41,6 +41,7 @@ security:
     access_control:
         - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
         - { path: /users/courses/enroll, roles: IS_AUTHENTICATED_FULLY }
+        - { path: /courses/create, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:
     security:

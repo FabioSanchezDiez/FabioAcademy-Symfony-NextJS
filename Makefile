@@ -30,5 +30,5 @@ install-dependencies: ##Install composer dependencies
 	sudo docker exec -it fabio_code_academy_api php bin/console lexik:jwt:generate-keypair --skip-if-exists
 
 .PHONY: tests
-tests: ##Run all unit tests
+tests: db ##Run all unit tests
 	sudo docker exec -it fabio_code_academy_api php bin/phpunit tests/
