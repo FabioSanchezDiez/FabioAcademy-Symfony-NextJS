@@ -7,7 +7,6 @@ export async function fetchPopularCourses(
   maxResults: number
 ) {
   try {
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/between/${min}/${max}/${maxResults}`
     );
@@ -21,7 +20,6 @@ export async function fetchPopularCourses(
 
 export async function fetchMostPopularCourse() {
   try {
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/popular`
     );
@@ -35,7 +33,6 @@ export async function fetchMostPopularCourse() {
 
 export async function fetchCoursesPaginated(page: number, maxElements: number) {
   try {
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`
     );
@@ -52,7 +49,6 @@ export async function fetchSearchedCourses(
   maxElements: number
 ) {
   try {
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/like/${query}/${page}/${maxElements}`
     );
@@ -67,7 +63,6 @@ export async function fetchCourseById(id: number) {
   try {
     //Forced await simulation
     //await new Promise((resolve) => setTimeout(resolve, 3000));
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/id/${id}`
     );
@@ -82,7 +77,6 @@ export async function fetchCourseById(id: number) {
 //SECTION ENDPOINTS
 export async function fetchSectionsByCourse(id: number) {
   try {
-    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/sections/course/${id}`
     );

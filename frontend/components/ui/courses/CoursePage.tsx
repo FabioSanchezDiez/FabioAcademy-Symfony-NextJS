@@ -51,7 +51,7 @@ export default function CoursePage({
     });
 
     setTimeout(() => {
-      router.push("/dashboard/learning");
+      router.push(`/dashboard/learning?id=${course.id}`);
     }, 2000);
   };
   return (

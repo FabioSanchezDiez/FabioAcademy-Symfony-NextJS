@@ -5,14 +5,16 @@ import { Suspense } from "react";
 export default function Page({
   searchParams,
 }: {
-  searchParams?: { page?: string };
+  searchParams?: { query?: string; page?: string };
 }) {
   const currentPage = Number(searchParams?.page) || 1;
+  const query = searchParams?.query || "";
 
   return (
     <>
       <h1 className="text-3xl font-bold my-10">Mis cursos</h1>
       <Suspense
+        key={query + currentPage}
         fallback={<CoursesSkeleton length={12} cols={2}></CoursesSkeleton>}
       >
         <MyCourses currentPage={currentPage}></MyCourses>
