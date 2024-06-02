@@ -18,7 +18,7 @@ export default function CourseCard({
 
   const href =
     pathname === "/dashboard/learning"
-      ? `/dashboard/watch/${id}`
+      ? `/dashboard/watch/${id}/1`
       : `/courses/${id}`;
 
   return (

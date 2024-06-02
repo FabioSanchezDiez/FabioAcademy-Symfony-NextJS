@@ -4,7 +4,15 @@ import { useState } from "react";
 import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
 import LessonComponent from "./LessonComponent";
 
-export default function SectionComponent({ section }: { section: Section }) {
+export default function SectionComponent({
+  section,
+  watch = false,
+  courseId = 1,
+}: {
+  section: Section;
+  watch?: boolean;
+  courseId?: number;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -24,7 +32,12 @@ export default function SectionComponent({ section }: { section: Section }) {
       {isOpen && (
         <div className="flex flex-col gap-2 bg-gray-200 dark:bg-slate-600 border-solid border-black border-x">
           {section.lessons.map((l: Lesson) => (
-            <LessonComponent key={l.id} lesson={l}></LessonComponent>
+            <LessonComponent
+              key={l.id}
+              lesson={l}
+              watch={watch}
+              courseId={courseId}
+            ></LessonComponent>
           ))}
         </div>
       )}

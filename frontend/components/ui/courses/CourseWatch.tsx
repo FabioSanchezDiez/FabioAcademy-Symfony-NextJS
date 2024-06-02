@@ -1,5 +1,5 @@
 "use client";
-import { Course, Section } from "@/src/lib/definitions";
+import { Course, Lesson, Section } from "@/src/lib/definitions";
 import React from "react";
 import Video from "../elements/Video";
 import CourseSections from "./CourseSections";
@@ -7,11 +7,12 @@ import CourseSections from "./CourseSections";
 export default function CourseWatch({
   course,
   sections,
+  lesson,
 }: {
   course: Course;
   sections: Section[];
+  lesson: Lesson;
 }) {
-  console.log(sections);
   return (
     <>
       <main className="mt-16">
@@ -19,10 +20,14 @@ export default function CourseWatch({
         {sections.length >= 1 ? (
           <section className="flex justify-between gap-12">
             <article>
-              <Video></Video>
+              <Video lesson={lesson}></Video>
             </article>
             <article className="w-full">
-              <CourseSections sections={sections}></CourseSections>
+              <CourseSections
+                sections={sections}
+                watch={true}
+                courseId={course.id}
+              ></CourseSections>
             </article>
           </section>
         ) : (

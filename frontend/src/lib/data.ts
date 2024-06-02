@@ -114,6 +114,26 @@ export async function fetchCoursesByUser(
   }
 }
 
+export async function fetchLessonById(id: number, token: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/lessons/id/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (data.code === 401) throw new Error("Expired JWT token");
+    return data;
+  } catch (err) {
+    throw new Error();
+  }
+}
+
 // USERS ENDPOINTS
 export async function registerUser(
   name: string,
