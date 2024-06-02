@@ -14,9 +14,6 @@ export default function Video({ lesson }: { lesson: Lesson }) {
           Your browser does not support the video tag...
         </video>
       </div>
-      <div>
-        <p>{lesson.title}</p>
-      </div>
     </>
   );
 }
