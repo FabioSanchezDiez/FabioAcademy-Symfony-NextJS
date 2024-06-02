@@ -12,6 +12,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class UserController extends AbstractController
 {
+    public function __construct(private UserRepository $userRepository)
+    {
+    }
+
     #[Route('/users/create', name: 'users_create', methods: ['POST'])]
     public function createUser(Request $request, UserService $userService): JsonResponse
     {
@@ -37,6 +41,15 @@ class UserController extends AbstractController
         $userService->enrollUser($userData);
 
         return new JsonResponse(["success" => "Usuario inscrito correctamente"], Response::HTTP_OK);
+    }
+
+    #[Route('/users/courses/check_enroll/{email}/{courseId}', name: 'users_courses_check_enroll', methods: ['GET'])]
+    public function checkEnrolledUserInCourse(string $email, int $courseId): Response
+    {
+        $success = $this->userRepository->isUserEnrolledInCourseById($email, $courseId);
+        if(!$success) return new Response(false ,Response::HTTP_UNAUTHORIZED);
+
+        return new Response(true ,Response::HTTP_OK);
     }
 
     #[Route('/auth/check', name: 'auth_check', methods: ['GET'])]

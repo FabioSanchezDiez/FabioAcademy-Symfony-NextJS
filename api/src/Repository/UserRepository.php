@@ -29,6 +29,26 @@ class UserRepository extends ServiceEntityRepository
         return true;
     }
 
+    /**
+     * @param string $email
+     * @param int $courseId
+     * @return bool
+     */
+    public function isUserEnrolledInCourseById(string $email, int $courseId): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->innerJoin('u.courses', 'c')
+            ->where('u.email = :email')
+            ->andWhere('c.id = :courseId')
+            ->setParameter('email', $email)
+            ->setParameter('courseId', $courseId)
+            ->getQuery();
+
+        $result = $qb->getOneOrNullResult();
+
+        return $result !== null;
+    }
+
 
 
     //    /**

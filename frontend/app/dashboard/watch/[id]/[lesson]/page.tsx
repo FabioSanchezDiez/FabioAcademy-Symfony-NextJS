@@ -1,3 +1,4 @@
+import CheckEnrolled from "@/components/auth/CheckEnrolled";
 import WatchCourse from "@/components/dashboard/WatchCourse";
 import CourseVideoSkeleton from "@/components/skeletons/CourseVideoSkeleton";
 import CourseSections from "@/components/ui/courses/CourseSections";
@@ -15,6 +16,9 @@ export default async function Page({
 
   return (
     <>
+      <Suspense>
+        <CheckEnrolled courseId={params.id}></CheckEnrolled>
+      </Suspense>
       <main className="mt-16">
         <h1 className="text-3xl font-bold my-10">{course.name}</h1>
         {sections.length >= 1 ? (

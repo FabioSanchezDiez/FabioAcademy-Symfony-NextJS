@@ -206,6 +206,30 @@ export async function confirmUser(token: string) {
   }
 }
 
+export async function checkUserEnrolled(
+  email: string,
+  courseId: number,
+  token: string
+) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/courses/check_enroll/${email}/${courseId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (data.code === 401) throw new Error("Expired JWT token");
+    return data;
+  } catch (err) {
+    throw new Error("Usuario no inscrito en el curso");
+  }
+}
+
 export async function checkSessionStatus(token: string) {
   try {
     const res = await fetch(
