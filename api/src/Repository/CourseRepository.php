@@ -141,6 +141,6 @@ class CourseRepository extends ServiceEntityRepository
             ->setParameter('email', $email)
             ->getQuery();
 
-        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize, true);
     }
 }

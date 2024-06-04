@@ -13,16 +13,20 @@ export type CourseItem = Pick<
   "id" | "name" | "image" | "registeredUsers"
 >;
 
+export type CourseItemWithFirstLesson = CourseItem & {
+  firstLesson?: number;
+};
+
 export type Section = {
   id: number;
   title: string;
   sectionOrder: number;
   lessons: [];
-}
+};
 
 export type Lesson = {
   id: number;
   title: string;
   lessonOrder: number;
   video: string;
-}
+};

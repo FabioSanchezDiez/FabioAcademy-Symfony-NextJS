@@ -1,4 +1,4 @@
-import { CourseItem } from "@/src/lib/definitions";
+import { Course, Lesson } from "@/src/lib/definitions";
 import CourseCard from "../ui/courses/CourseCard";
 import { fetchCoursesByUser } from "@/src/lib/data";
 import { getServerSession } from "next-auth";
@@ -27,13 +27,14 @@ export default async function MyCourses({
       </h1>
       <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6 max-sm:px-4">
         {courses.courses.length >= 1 ? (
-          courses.courses.map((c: CourseItem) => (
+          courses.courses.map((c: { course: Course; firstLesson: Lesson }) => (
             <CourseCard
-              key={c.id}
-              id={c.id}
-              name={c.name}
-              image={c.image}
-              registeredUsers={c.registeredUsers}
+              key={c.course.id}
+              id={c.course.id}
+              name={c.course.name}
+              image={c.course.image}
+              registeredUsers={c.course.registeredUsers}
+              firstLesson={c.firstLesson?.id}
             />
           ))
         ) : (

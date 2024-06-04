@@ -1,5 +1,5 @@
 "use client";
-import { CourseItem } from "@/src/lib/definitions";
+import { CourseItem, CourseItemWithFirstLesson } from "@/src/lib/definitions";
 import Image from "next/image";
 import Link from "next/link";
 import TagYellow from "../elements/TagYellow";
@@ -10,7 +10,8 @@ export default function CourseCard({
   name,
   image,
   registeredUsers,
-}: CourseItem) {
+  firstLesson,
+}: CourseItemWithFirstLesson) {
   const pathname = usePathname();
 
   const isPopularCourse =
@@ -18,7 +19,7 @@ export default function CourseCard({
 
   const href =
     pathname === "/dashboard/learning"
-      ? `/dashboard/watch/${id}/1`
+      ? `/dashboard/watch/${id}/${firstLesson}`
       : `/courses/${id}`;
 
   return (
