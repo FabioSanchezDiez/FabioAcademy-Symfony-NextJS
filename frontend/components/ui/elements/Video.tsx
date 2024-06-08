@@ -3,7 +3,7 @@ import { Lesson } from "@/src/lib/definitions";
 export default function Video({ lesson }: { lesson: Lesson }) {
   return (
     <>
-      <div className="border-4 border-slate-600 border-solid w-[1000px]">
+      <div className="border-4 border-slate-600 border-solid lg:w-[1000px]">
         <video
           controls
           width={1000}

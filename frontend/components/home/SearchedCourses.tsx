@@ -15,7 +15,7 @@ export default async function SearchedCourses({
   const courses = await fetchSearchedCourses(query, currentPage, 10);
   return (
     <>
-      <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6 max-sm:px-4">
+      <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6">
         {courses.courses.length >= 1 ? (
           courses.courses.map((c: CourseItem) => (
             <CourseCard

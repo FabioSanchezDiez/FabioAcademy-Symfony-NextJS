@@ -47,13 +47,15 @@ export default async function MyCourses({
           <Pagination totalPages={courses.totalPages} />
         </div>
       ) : (
-        <Link href={"/courses"}>
-          <Button
-            textContent="Ver cursos disponibles"
-            bgColor="bg-darkenLightBlue mt-6 w-60"
-            textColor="text-white"
-          ></Button>
-        </Link>
+        <div className="mt-6 w-40">
+          <Link href={"/courses"}>
+            <Button
+              textContent="Ver cursos disponibles"
+              bgColor="bg-darkenLightBlue"
+              textColor="text-white"
+            ></Button>
+          </Link>
+        </div>
       )}
     </>
   );

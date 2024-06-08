@@ -11,14 +11,14 @@ export default function Page({
   const query = searchParams?.query || "";
 
   return (
-    <>
-      <h1 className="text-3xl font-bold my-10">Mis cursos</h1>
+    <div className="max-md:px-6">
+      <h1 className="text-3xl font-bold my-10 ">Mis cursos</h1>
       <Suspense
         key={query + currentPage}
         fallback={<CoursesSkeleton length={12} cols={2}></CoursesSkeleton>}
       >
         <MyCourses currentPage={currentPage}></MyCourses>
       </Suspense>
-    </>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Courses({
   const currentPage = Number(searchParams?.page) || 1;
   const options = ["Programación", "Desarrollo Web", "DevOps", "Mobile"];
   return (
-    <>
+    <div className="max-md:px-6">
       {/* <CourseFilter options={options}></CourseFilter> */}
 
       <h1 className="my-12 text-3xl font-bold">
@@ -21,6 +21,6 @@ export default function Courses({
       <Suspense key={currentPage} fallback={<CoursesSkeleton length={12} />}>
         <FilteredCourses currentPage={currentPage} />
       </Suspense>
-    </>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Page({
   const query = searchParams?.query || "";
 
   return (
-    <>
+    <div className="max-md:px-6">
       <div className="mt-10">
         {!query ? (
           <p className="text-center">
@@ -37,6 +37,6 @@ export default function Page({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

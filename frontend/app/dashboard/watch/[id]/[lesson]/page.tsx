@@ -20,10 +20,10 @@ export default async function Page({
         <CheckEnrolled courseId={params.id}></CheckEnrolled>
       </Suspense>
       <main className="mt-16">
-        <h1 className="text-3xl font-bold my-10">{course.name}</h1>
+        <h1 className="text-3xl font-bold my-10 max-md:px-6">{course.name}</h1>
         {sections.length >= 1 ? (
           <>
-            <section className="flex justify-between gap-12 flex-col xl:flex-row">
+            <section className="flex justify-between gap-12 flex-col xl:flex-row max-md:px-6">
               <article>
                 <Suspense
                   fallback={<CourseVideoSkeleton></CourseVideoSkeleton>}
