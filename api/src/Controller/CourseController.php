@@ -87,6 +87,15 @@ class CourseController extends AbstractController
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
 
+    #[Route('/courses/users/owner/{email}/{page}/{size}', name: 'courses_users_owner_email', methods: ['GET'])]
+    public function coursesByOwner(int $page, int $size,string $email): Response
+    {
+        $course = $this->courseRepository->findOwnedCoursesByOwnerEmail($page, $size, $email);
+        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+
+        return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
+    }
+
     #[Route('/courses/create', name: 'courses_create', methods: ['POST'])]
     public function createCourse(Request $request): Response
     {

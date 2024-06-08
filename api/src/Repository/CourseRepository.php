@@ -143,4 +143,22 @@ class CourseRepository extends ServiceEntityRepository
 
         return $this->courseService->returnPaginatedResponse($query, $page, $pageSize, true);
     }
+
+    /**
+     * @param int $page
+     * @param int $pageSize
+     * @param string $email
+     * @return Course[]
+     */
+    public function findOwnedCoursesByOwnerEmail(int $page, int $pageSize, string $email): array
+    {
+        $query = $this->createQueryBuilder('c')
+            ->innerJoin('c.owner', 'u')
+            ->where('u.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery();
+
+        return $this->courseService->returnPaginatedResponse($query, $page, $pageSize);
+
+    }
 }
