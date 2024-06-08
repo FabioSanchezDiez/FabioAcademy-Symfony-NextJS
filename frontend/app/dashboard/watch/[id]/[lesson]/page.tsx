@@ -23,7 +23,7 @@ export default async function Page({
         <h1 className="text-3xl font-bold my-10">{course.name}</h1>
         {sections.length >= 1 ? (
           <>
-            <section className="flex justify-between gap-12">
+            <section className="flex justify-between gap-12 flex-col xl:flex-row">
               <article>
                 <Suspense
                   fallback={<CourseVideoSkeleton></CourseVideoSkeleton>}
