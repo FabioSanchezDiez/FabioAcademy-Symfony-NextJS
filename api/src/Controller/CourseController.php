@@ -12,13 +12,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class CourseController extends AbstractController
 {
+    private const DATETIME_FORMAT = ['datetime_format' => 'Y-m-d'];
+
     public function __construct(private CourseRepository $courseRepository, private SerializerInterface $serializer){}
 
     #[Route('/courses', name: 'courses', methods: ['GET'])]
     public function courses(): Response
     {
         $courses = $this->courseRepository->findAll();
-        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($courses, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -27,7 +29,7 @@ class CourseController extends AbstractController
     public function coursesPaginated(int $page, int $size): Response
     {
         $courses = $this->courseRepository->findAllPaginated($page,$size);
-        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($courses, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -37,7 +39,7 @@ class CourseController extends AbstractController
     {
         $categories = json_decode($request->getContent(), true)["categories"];
         $courses = $this->courseRepository->findPaginatedFilter($page,$size, $categories);
-        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($courses, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -46,7 +48,7 @@ class CourseController extends AbstractController
     public function courseById(int $id): Response
     {
         $course = $this->courseRepository->find($id);
-        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($course, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -55,7 +57,7 @@ class CourseController extends AbstractController
     public function coursesBetweenRegisteredUsers(int $min, int $max, int $maxResults): Response
     {
         $courses = $this->courseRepository->findByRegisteredUsers($min, $max, $maxResults);
-        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($courses, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -64,7 +66,7 @@ class CourseController extends AbstractController
     public function coursesLikeName(string $condition, int $page, int $size): Response
     {
         $courses = $this->courseRepository->findLikeName($page, $size, $condition);
-        $data = $this->serializer->serialize($courses, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($courses, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -73,7 +75,7 @@ class CourseController extends AbstractController
     public function mostPopularCourse(): Response
     {
         $course = $this->courseRepository->findMostPopularCourse();
-        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($course, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -82,7 +84,7 @@ class CourseController extends AbstractController
     public function coursesByUser(int $page, int $size,string $email): Response
     {
         $course = $this->courseRepository->findCoursesByUser($page, $size, $email);
-        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($course, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -91,7 +93,7 @@ class CourseController extends AbstractController
     public function coursesByOwner(int $page, int $size,string $email): Response
     {
         $course = $this->courseRepository->findOwnedCoursesByOwnerEmail($page, $size, $email);
-        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($course, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_OK, ['Content-Type' => 'application/json']);
     }
@@ -101,7 +103,7 @@ class CourseController extends AbstractController
     {
         $courseData = json_decode($request->getContent(), true);
         $course = $this->courseRepository->createCourse($courseData);
-        $data = $this->serializer->serialize($course, 'json', ['datetime_format' => 'Y-m-d']);
+        $data = $this->serializer->serialize($course, 'json', self::DATETIME_FORMAT);
 
         return new Response($data, Response::HTTP_CREATED, ['Content-Type' => 'application/json']);
     }
