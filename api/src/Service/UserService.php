@@ -53,6 +53,7 @@ class UserService
             if ($user->getCourses()->contains($course)) {
                 throw new \Exception("Usuario ya inscrito en el curso");
             }
+            $course->setRegisteredUsers($course->getRegisteredUsers() + 1);
             $user->addCourse($course);
             $this->userRepository->createOrUpdateUser($user);
         }
