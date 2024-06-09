@@ -32,6 +32,7 @@ export async function fetchMostPopularCourse() {
 }
 
 export async function fetchCoursesPaginated(page: number, maxElements: number) {
+  unstable_noStore();
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/paginated/${page}/${maxElements}`
@@ -63,6 +64,7 @@ export async function fetchCourseById(id: number) {
   try {
     //Forced await simulation
     //await new Promise((resolve) => setTimeout(resolve, 3000));
+    unstable_noStore();
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/id/${id}`
     );
@@ -95,9 +97,36 @@ export async function fetchCoursesByUser(
   page: number,
   size: number
 ) {
+  unstable_noStore();
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/users/${email}/${page}/${size}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (data.code === 401) throw new Error("Expired JWT token");
+    return data;
+  } catch (err) {
+    throw new Error();
+  }
+}
+
+export async function fetchCoursesByOwner(
+  email: string,
+  token: string,
+  page: number,
+  size: number
+) {
+  unstable_noStore();
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/courses/users/owner/${email}/${page}/${size}`,
       {
         method: "GET",
         headers: {
@@ -131,6 +160,26 @@ export async function fetchLessonById(id: number, token: string) {
     return data;
   } catch (err) {
     throw new Error();
+  }
+}
+
+export async function deleteCourse(courseId: number, token: string) {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL_CLIENT}/courses/delete/${courseId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    throw new Error("Failed to delete the course");
   }
 }
 
