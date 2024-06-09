@@ -1,5 +1,7 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a name="readme-top"></a>
+
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
 *** that would make this better, please fork the repo and create a pull request
@@ -7,8 +9,6 @@
 *** Don't forget to give the project a star!
 *** Thanks again! Now go create something AMAZING! :D
 -->
-
-
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -19,7 +19,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-
 <div align="center">
   <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS">
     <img src="https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FFabioCodeAcademy_Logo.png?alt=media&token=58d006bc-459b-4fb1-b04c-053b739045f5" alt="Logo" width="150" height="170">
@@ -28,34 +27,36 @@
 <h3 align="center">FabioCode - Academy</h3>
 
   <p align="center">
-    FabioCode Academy is my final project for the DAM course at Atlántida Formación Profesional.
+    FabioCode Academy is my final project for the DAM degree at Atlántida Formación Profesional.
     <br />
-    <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS/blob/master/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="">View Demo</a>
+    <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS">View Demo</a>
     ·
-    <a href="">Report Bug</a>
+    <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS/issues/new">Report Bug</a>
     ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS/issues/new">Request Feature</a>
   </p>
 </div>
 
 ## About The Project
 
-FabioCode Academy features a robust API built with Symfony and a frontend developed using Next.js. Each component operates as an independent black box, ensuring seamless integration and modularity. 
+FabioCode Academy is an academy of programming courses with a robust API built with Symfony and a frontend developed using Next.js. Each component operates as an independent black box, ensuring seamless integration and modularity. It is my first project with these technologies.
 
 ### Built With
 
+- [![PHP][PHP]][PHP-url]
+- [![Symfony][Symfony.com]][Symfony-url]
+- [![MySQL][MySQL]][MySQL-url]
+- [![Typescript][Typescript]][Typescript-url]
+- [![Next][Next.js]][Next-url]
+- [![React][React.js]][React-url]
+- [![Tailwind][Tailwind.com]][Tailwind-url]
 
-* [![PHP][PHP]][PHP-url]
-* [![Symfony][Symfony.com]][Symfony-url]
-* [![MySQL][MySQL]][MySQL-url]
-* [![Typescript][Typescript]][Typescript-url]
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Tailwind][Tailwind.com]][Tailwind-url]
+### Home Page
 
+[![Mockup FabioCode - Academy][mockup-url]](https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -91,6 +92,7 @@ It also has a Makefile to automatize the execution and the building of the proje
 Now you should be able to access http://localhost:3000/
 
 ### For future initilizations
+
 Once you already set up the project for the next time that you want to run it execute that:
 
 1. Run all the containers:
@@ -98,10 +100,38 @@ Once you already set up the project for the next time that you want to run it ex
    ```sh
    make up
    ```
+
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Features
+
+Below are the main features of FabioCode Academy:
+
+- Account creation and login with JWT
+- Role system (User, Teacher, Admin)
+- Email sending for account confirmation
+- Course viewing service by enrollment
+- Course search
+- Create, update, and delete courses (teachers and admins only)
+- Dark and light mode based on user preferences
+- Responsive design
+- XDebug integration (only for development)
+
+### Entity-Relationship Diagram
+
+[![Mockup FabioCode - Academy][diagram-url]](https://github.com/FabioSanchezDiez/FabioAcademy-Symfony-NextJS)
+
+   <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Acknowledgements
+
+I would like to thank all the teachers I have had, and especially **[Aircury](https://www.aircury.es/)**, the company where I completed my internship, it has been a truly enriching experience.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [Typescript-url]: https://www.typescriptlang.org/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
@@ -119,5 +149,7 @@ Once you already set up the project for the next time that you want to run it ex
 [Ubuntu]: https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white
 [Ubuntu-url]: https://ubuntu.com/download
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+[mockup-url]: https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FFabioCodeMockup.png?alt=media&token=e6f6b821-6126-4740-8e61-968c1e132b8c
+[diagram-url]: https://firebasestorage.googleapis.com/v0/b/fabiocodeacademy.appspot.com/o/CoursesImages%2FFabioCodeDiagram.png?alt=media&token=d6152ae9-b0fc-4738-84b1-828e074eb308
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [built-with-love]: http://ForTheBadge.com/images/badges/built-with-love.svg
