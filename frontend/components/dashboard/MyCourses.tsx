@@ -19,6 +19,7 @@ export default async function MyCourses({
     currentPage,
     10
   );
+
   return (
     <>
       <h1 className="text-2xl font-bold mb-10">

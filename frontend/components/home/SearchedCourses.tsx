@@ -17,15 +17,17 @@ export default async function SearchedCourses({
     <>
       <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6">
         {courses.courses.length >= 1 ? (
-          courses.courses.map((c: CourseItem) => (
-            <CourseCard
-              key={c.id}
-              id={c.id}
-              name={c.name}
-              image={c.image}
-              registeredUsers={c.registeredUsers}
-            />
-          ))
+          courses.courses.map(
+            ({ id, name, image, registeredUsers }: CourseItem) => (
+              <CourseCard
+                key={id}
+                id={id}
+                name={name}
+                image={image}
+                registeredUsers={registeredUsers}
+              />
+            )
+          )
         ) : (
           <p>No se han encontrado cursos para &quot;{query}&quot;</p>
         )}

@@ -9,19 +9,22 @@ export default async function FilteredCourses({
   currentPage: number;
 }) {
   const courses = await fetchCoursesPaginated(currentPage, 12);
+
   return (
     <>
       <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6">
         {courses.courses.length >= 1 ? (
-          courses.courses.map((c: CourseItem) => (
-            <CourseCard
-              key={c.id}
-              id={c.id}
-              name={c.name}
-              image={c.image}
-              registeredUsers={c.registeredUsers}
-            />
-          ))
+          courses.courses.map(
+            ({ id, name, image, registeredUsers }: CourseItem) => (
+              <CourseCard
+                key={id}
+                id={id}
+                name={name}
+                image={image}
+                registeredUsers={registeredUsers}
+              />
+            )
+          )
         ) : (
           <p className="">No se han encontrado cursos.</p>
         )}

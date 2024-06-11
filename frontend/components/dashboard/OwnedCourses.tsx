@@ -27,22 +27,24 @@ export default async function OwnedCourses({
       </h1>
       <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6 max-sm:px-4">
         {courses.courses.length >= 1 ? (
-          courses.courses.map((c: CourseItem) => (
-            <div key={c.id} className="flex gap-2 flex-col md:flex-row">
-              <CourseCard
-                id={c.id}
-                name={c.name}
-                image={c.image}
-                registeredUsers={c.registeredUsers}
-              />
-              <div className="block p-2">
-                <DeleteActionButton
-                  courseId={c.id}
-                  token={session?.user.token!}
-                ></DeleteActionButton>
+          courses.courses.map(
+            ({ id, name, image, registeredUsers }: CourseItem) => (
+              <div key={id} className="flex gap-2 flex-col md:flex-row">
+                <CourseCard
+                  id={id}
+                  name={name}
+                  image={image}
+                  registeredUsers={registeredUsers}
+                />
+                <div className="block p-2">
+                  <DeleteActionButton
+                    courseId={id}
+                    token={session?.user.token!}
+                  ></DeleteActionButton>
+                </div>
               </div>
-            </div>
-          ))
+            )
+          )
         ) : (
           <p className="text-lg">
             Todavía no existe soporte nativo para crear cursos desde la
