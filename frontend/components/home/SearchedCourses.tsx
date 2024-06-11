@@ -13,10 +13,12 @@ export default async function SearchedCourses({
   currentPage,
 }: SearchedCoursesProps) {
   const courses = await fetchSearchedCourses(query, currentPage, 10);
+  const hasCourses = courses.courses.length >= 1;
+
   return (
     <>
       <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6">
-        {courses.courses.length >= 1 ? (
+        {hasCourses ? (
           courses.courses.map(
             ({ id, name, image, registeredUsers }: CourseItem) => (
               <CourseCard

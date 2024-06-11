@@ -18,6 +18,7 @@ export default async function OwnedCourses({
     currentPage,
     10
   );
+  const hasCourses = courses.courses.length >= 1;
 
   return (
     <>
@@ -26,7 +27,7 @@ export default async function OwnedCourses({
         <span className="text-darkenLightBlue">{session?.user.name}</span>
       </h1>
       <section className="container flex flex-col xl:grid xl:grid-cols-2 lg:grid lg:grid-cols-2 gap-6 max-sm:px-4">
-        {courses.courses.length >= 1 ? (
+        {hasCourses ? (
           courses.courses.map(
             ({ id, name, image, registeredUsers }: CourseItem) => (
               <div key={id} className="flex gap-2 flex-col md:flex-row">
@@ -53,7 +54,7 @@ export default async function OwnedCourses({
         )}
       </section>
 
-      {courses.courses.length >= 1 && (
+      {hasCourses && (
         <div className="mt-10 bg-white dark:bg-slate-800 rounded-lg w-fit p-4 shadow-xl">
           <Pagination totalPages={courses.totalPages} />
         </div>

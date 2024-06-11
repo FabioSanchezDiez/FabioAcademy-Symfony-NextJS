@@ -19,6 +19,7 @@ export default async function MyCourses({
     currentPage,
     10
   );
+  const hasCourses = courses.courses.length >= 1;
 
   return (
     <>
@@ -27,7 +28,7 @@ export default async function MyCourses({
         <span className="text-darkenLightBlue">{session?.user.name}</span>
       </h1>
       <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6 max-sm:px-4">
-        {courses.courses.length >= 1 ? (
+        {hasCourses ? (
           courses.courses.map((c: { course: Course; firstLesson: Lesson }) => (
             <CourseCard
               key={c.course.id}
@@ -43,7 +44,7 @@ export default async function MyCourses({
         )}
       </section>
 
-      {courses.courses.length >= 1 ? (
+      {hasCourses ? (
         <div className="mt-10 bg-white dark:bg-slate-800 rounded-lg w-fit p-4 shadow-xl">
           <Pagination totalPages={courses.totalPages} />
         </div>

@@ -9,11 +9,12 @@ export default async function FilteredCourses({
   currentPage: number;
 }) {
   const courses = await fetchCoursesPaginated(currentPage, 12);
+  const hasCourses = courses.courses.length >= 1;
 
   return (
     <>
       <section className="container flex flex-col xl:grid xl:grid-cols-3 lg:grid lg:grid-cols-2 gap-6">
-        {courses.courses.length >= 1 ? (
+        {hasCourses ? (
           courses.courses.map(
             ({ id, name, image, registeredUsers }: CourseItem) => (
               <CourseCard
